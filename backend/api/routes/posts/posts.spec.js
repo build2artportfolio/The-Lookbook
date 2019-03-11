@@ -9,7 +9,7 @@ afterEach(async () => {
 	await db("posts").del();
 });
 
-describe("Post Routes", () => {
+describe.skip("Post Routes", () => {
 	describe("/", () => {
 		it("should return status 200", async () => {
 			const res = await request(server).get("/api/posts");

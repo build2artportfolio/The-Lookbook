@@ -31,7 +31,22 @@ const getOne = async filter => {
 	return foundPost;
 };
 
+const get = async (perPage, page) => {
+	const totalPosts = await db("posts")
+		.count()
+		.first();
+	const posts = await db("posts")
+		.offset(perPage * page)
+		.limit(perPage);
+	const pagesObject = {
+		totalPosts: Number(totalPosts.count),
+		posts
+	};
+	return pagesObject;
+};
+
 module.exports = {
 	create,
-	getOne
+	getOne,
+	get
 };

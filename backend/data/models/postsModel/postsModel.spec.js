@@ -94,31 +94,42 @@ describe("Posts Model Functions", () => {
 				username: "Michael",
 				password: "test"
 			});
-			const posts = await generatePosts();
-			await db("posts").insert(posts);
+			//Generate posts with fakerJS
+			const genPosts = await generatePosts(100, user.id);
+			//insert generated posts
+			await db("posts").insert(genPosts);
+			//Set pagination values
 			const postsPerPage = 10;
 			const pageNumber = 2;
+			//Execute Posts.get with pagination values
 			const fetchedPosts = await Posts.get(postsPerPage, pageNumber);
+			//Create expected object based on the generated posts.
 			const expected = {
 				totalPosts: 100,
-				posts: posts.slice(
+				posts: genPosts.slice(
 					pageNumber * postsPerPage,
 					pageNumber * postsPerPage + postsPerPage
 				)
 			};
-			expect(fetchedPosts).toEqual(expected);
+			//Test if the properties are accurate compared to the posts we generated.
+			expect(fetchedPosts.totalPosts).toBe(100);
+			expect(fetchedPosts.posts.length).toBe(10);
+			expect(fetchedPosts.posts[5]).toEqual({
+				...fetchedPosts.posts[5],
+				...expected.posts[5]
+			});
 		});
 	});
 });
 
-const generatePosts = amount => {
+const generatePosts = (amount, userId) => {
 	let postSeeds = [];
 	for (let k = 1; k <= amount; k++) {
 		let newSeed = {
 			title: faker.lorem.words(),
 			description: faker.lorem.sentence(),
 			imageUrl: faker.image.imageUrl(),
-			artistId: user.id
+			artistId: userId
 		};
 		postSeeds.push(newSeed);
 		if (k === amount) return postSeeds;
