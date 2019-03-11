@@ -4,6 +4,11 @@ exports.up = function(knex, Promise) {
 		table.string("title").notNullable();
 		table.string("description");
 		table.string("imageUrl");
+		table
+			.integer("artistId")
+			.unsigned()
+			.references("id")
+			.inTable("users");
 		table.timestamps(true, true);
 	});
 };
