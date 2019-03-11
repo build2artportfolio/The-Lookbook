@@ -143,6 +143,76 @@ describe("Post Routes", () => {
 			expect(res.status).toBe(201);
 		});
 	});
+
+	describe("PUT /:id", () => {
+		it("should return status 401 if no JWT token in headers", async () => {
+			let newProps = {
+				title: faker.lorem.words(),
+				description: faker.lorem.sentence()
+			};
+			const res = await request(server)
+				.put("/api/put/1")
+				.send(newProps);
+			expect(res.status).toBe(401);
+		});
+
+		it("should return status 422 if no title or image provided", async () => {
+			//Create user. Users model is already tested, so we are just using it to provide a valid Foreign Key to the created posts.
+			const user = await Users.create({
+				username: "Michael",
+				password: "test"
+			});
+			//Now create a JWT for the users authentication, just for testing the API's response.
+			const payload = {
+				id: user.id,
+				username: user.username
+			};
+			const token = await jwt.sign(payload, process.env.JWT_SECRET, {
+				expiresIn: "1d"
+			});
+			//
+			let newProps = {
+				title: faker.lorem.words(),
+				description: faker.lorem.sentence(),
+				image: "test - we do not allow image edits, just upload a new image."
+			};
+			const res = await request(server)
+				.put("/api/posts/1")
+				.send(newProps)
+				.set("authorization", token);
+			expect(res.status).toBe(422);
+		});
+
+		it("should return status 201 and the updated post with successful authentication", async () => {
+			//Create user. Users model is already tested, so we are just using it to provide a valid JWT.
+			const user = await Users.create({
+				username: "Michael",
+				password: "test"
+			});
+			//Now create a JWT for the users authentication, just for testing the API's response.
+			const payload = {
+				id: user.id,
+				username: user.username
+			};
+			const token = await jwt.sign(payload, process.env.JWT_SECRET, {
+				expiresIn: "1d"
+			});
+			//Generate posts with fakerJS
+			const genPosts = await generatePosts(1, user.id);
+			//insert generated posts for testing the API response.
+			const newPost = await Posts.create(genPosts[0]);
+			//Set properties to update
+			const newProps = {
+				title: "NEW TITLE NOW"
+			};
+			const res = await request(server)
+				.post(`/api/posts/${newPost.id}`)
+				.send(newProps)
+				.set("authorization", token);
+			expect(res.status).toBe(201);
+			expect(res.body).toEqual({ ...newPost, ...newProps });
+		});
+	});
 });
 
 const generatePosts = (amount, userId) => {
