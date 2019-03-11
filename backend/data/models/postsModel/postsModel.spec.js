@@ -86,4 +86,41 @@ describe("Posts Model Functions", () => {
 			expect(foundPost).toBe(null);
 		});
 	});
+
+	describe("get()", () => {
+		it("should return the proper object depending on page size, and page number parameters provided.", async () => {
+			//Create user. Users model is already tested, so we are just using it to provide a valid Foreign Key to the created post.
+			const user = await Users.create({
+				username: "Michael",
+				password: "test"
+			});
+			const posts = await generatePosts();
+			await db("posts").insert(posts);
+			const postsPerPage = 10;
+			const pageNumber = 2;
+			const fetchedPosts = await Posts.get(postsPerPage, pageNumber);
+			const expected = {
+				totalPosts: 100,
+				posts: posts.slice(
+					pageNumber * postsPerPage,
+					pageNumber * postsPerPage + postsPerPage
+				)
+			};
+			expect(fetchedPosts).toEqual(expected);
+		});
+	});
 });
+
+const generatePosts = amount => {
+	let postSeeds = [];
+	for (let k = 1; k <= amount; k++) {
+		let newSeed = {
+			title: faker.lorem.words(),
+			description: faker.lorem.sentence(),
+			imageUrl: faker.image.imageUrl(),
+			artistId: user.id
+		};
+		postSeeds.push(newSeed);
+		if (k === amount) return postSeeds;
+	}
+};
