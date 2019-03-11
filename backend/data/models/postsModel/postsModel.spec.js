@@ -137,7 +137,7 @@ describe("Posts Model Functions", () => {
 			const createdPost = await Posts.create(postObject);
 			const updateProps = { title: "NewTitle", description: "NewDesc" };
 			const updatedPost = await Posts.update(createdPost.id, updateProps);
-			expect(updatedPost).toEqual({ ...updatedPost, ...createdPost });
+			expect(updatedPost).toEqual({ ...createdPost, ...updatedPost });
 		});
 
 		it("should return null if nothing was updated", async () => {

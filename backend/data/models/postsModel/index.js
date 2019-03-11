@@ -53,8 +53,19 @@ const get = async (perPage, page) => {
 	return pagesObject;
 };
 
+const update = async (id, props) => {
+	if (!id || !props) return null;
+	const [updatedPostId] = await db("posts")
+		.where({ id })
+		.update(props, "id");
+	if (!updatedPostId) return null;
+	const updatedPost = await getOne({ id: updatedPostId });
+	return updatedPost;
+};
+
 module.exports = {
 	create,
 	getOne,
-	get
+	get,
+	update
 };
