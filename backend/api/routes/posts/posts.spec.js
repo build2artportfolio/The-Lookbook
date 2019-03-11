@@ -66,14 +66,14 @@ describe("Post Routes", () => {
 				password: "test"
 			});
 			//Generate posts with fakerJS
-			const genPosts = await generatePosts(3, user.id);
+			const genPosts = await generatePosts(1, user.id);
 			//insert generated posts for testing the API response.
-			await db("posts").insert(genPosts);
+			const newPost = await Posts.create(genPosts[0]);
 			//Get one of the posts we just generated.
-			const res = await request(server).get(`/api/posts/${genPosts[0].id}`);
-			const foundPost = await Posts.getOne({ id: genPosts[0].id });
+			const res = await request(server).get(`/api/posts/${newPost.id}`);
+			const foundPost = await Posts.getOne({ id: newPost.id });
 			expect(res.status).toBe(200);
-			expect(res.body).toEqual(foundPost);
+			expect(res.body.title).toEqual(foundPost.title);
 		});
 	});
 

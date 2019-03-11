@@ -20,6 +20,17 @@ router.get("/", async (req, res) => {
 	}
 });
 
+router.get("/:id", async (req, res) => {
+	try {
+		const foundPost = await Posts.getOne({ id: req.params.id });
+		if (!foundPost)
+			return res.status(404).json({ message: "No post with that ID found." });
+		res.status(200).json(foundPost);
+	} catch (error) {
+		return res.status(500).json({ message: "Internal error." });
+	}
+});
+
 router.post("/", authenticate, async (req, res) => {
 	const { title, description, image } = req.body;
 	if (!title || !image)
@@ -37,7 +48,6 @@ router.post("/", authenticate, async (req, res) => {
 		const createdPost = await Posts.create(newPost);
 		return res.status(201).json(createdPost);
 	} catch (error) {
-		console.log(error);
 		return res.status(500).json({ message: "Internal error." });
 	}
 });
