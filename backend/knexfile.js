@@ -25,7 +25,7 @@ module.exports = {
 		client: "pg",
 		connection: {
 			host: "localhost",
-			database: "thelookbooktest",
+			database: "thelookbook",
 			user: "michael",
 			password: "password"
 		},

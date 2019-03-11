@@ -1,18 +1,23 @@
 const request = require("supertest");
 const server = require("../../server");
+const db = require("../../../data/database");
 
 describe("Auth Routes", () => {
+	//After each test, reset the users table.
+	afterEach(async () => {
+		await db("users").truncate();
+	});
 	describe("/register", () => {
-		it("should return Status 400 if no username or password is provided", async () => {
-			//Purposely don't provide password to test if we get 400 status code.
+		it("should return Status 422 if no username or password is provided", async () => {
+			//Purposely don't provide password to test if we get 422 status code.
 			const body = {
 				username: "Michael"
 			};
 			const res = await request(server)
 				.post("/api/auth/register")
-				.set("Accept", "application/json")
-				.send(body);
-			expect(res.status).toBe(400);
+				.send(body)
+				.set("accept", "application/json");
+			expect(res.status).toBe(422);
 		});
 
 		it("should return Status 201 if valid username and password provided", async () => {
@@ -22,8 +27,9 @@ describe("Auth Routes", () => {
 			};
 			const res = await request(server)
 				.post("/api/auth/register")
-				.set("Accept", "application/json")
-				.send(body);
+				.send(body)
+				.set("Accept", "application/json");
+
 			expect(res.status).toBe(201);
 		});
 
@@ -34,8 +40,8 @@ describe("Auth Routes", () => {
 			};
 			const res = await request(server)
 				.post("/api/auth/register")
-				.set("Accept", "application/json")
-				.send(body);
+				.send(body)
+				.set("Accept", "application/json");
 			expect(res.body).toEqual({ message: "Successfully registered account." });
 		});
 	});
