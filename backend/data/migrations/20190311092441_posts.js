@@ -8,7 +8,8 @@ exports.up = function(knex, Promise) {
 			.integer("artistId")
 			.unsigned()
 			.references("id")
-			.inTable("users");
+			.inTable("users")
+			.onDelete("CASCADE");
 		table.timestamps(true, true);
 	});
 };
