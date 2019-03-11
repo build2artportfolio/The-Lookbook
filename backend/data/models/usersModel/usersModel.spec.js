@@ -15,6 +15,7 @@ describe("Users Model Functions", () => {
 			};
 			const createdUser = await Users.create(newUser);
 			//Expect that the new created user has an id from createdUser, then the username and password provided from newUser object/Passed in user object.
+			//The create function should create the user, but also return the user object.
 			expect(createdUser).toEqual({ ...createdUser, ...newUser });
 		});
 	});
