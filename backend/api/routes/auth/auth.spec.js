@@ -1,6 +1,7 @@
 const request = require("supertest");
 const server = require("../../server");
 const db = require("../../../data/database");
+const Users = require("../../../data/models/usersModel");
 
 describe("Auth Routes", () => {
 	//After each test, reset the users table.
@@ -15,8 +16,7 @@ describe("Auth Routes", () => {
 			};
 			const res = await request(server)
 				.post("/api/auth/register")
-				.send(body)
-				.set("accept", "application/json");
+				.send(body);
 			expect(res.status).toBe(422);
 		});
 
@@ -27,8 +27,7 @@ describe("Auth Routes", () => {
 			};
 			const res = await request(server)
 				.post("/api/auth/register")
-				.send(body)
-				.set("Accept", "application/json");
+				.send(body);
 
 			expect(res.status).toBe(201);
 		});
@@ -40,8 +39,7 @@ describe("Auth Routes", () => {
 			};
 			const res = await request(server)
 				.post("/api/auth/register")
-				.send(body)
-				.set("Accept", "application/json");
+				.send(body);
 			expect(res.body).toEqual({ message: "Successfully registered account." });
 		});
 
@@ -53,17 +51,73 @@ describe("Auth Routes", () => {
 			//Have api create one account.
 			const res1 = await request(server)
 				.post("/api/auth/register")
-				.send(body)
-				.set("Accept", "application/json");
+				.send(body);
 			//Attempt to create another account with the same credentials. Should not allow us to, as the username is already in use.
 			const res2 = await request(server)
 				.post("/api/auth/register")
-				.send(body)
-				.set("Accept", "application/json");
+				.send(body);
 			expect(res2.status).toBe(400);
 			expect(res2.body).toEqual({
 				message: "Account with those credentials is already taken."
 			});
+		});
+	});
+
+	describe("/login", () => {
+		it("should return Status 422 if no username or password is provided", async () => {
+			//Purposely don't provide password to test if we get 422 status code.
+			const body = {
+				username: "Michael"
+			};
+			const res = await request(server)
+				.post("/api/auth/login")
+				.send(body);
+			expect(res.status).toBe(422);
+		});
+
+		it("should return Status 400 if incorrect username and password are provided", async () => {
+			//Create a user so we can test logging in incorrectly.
+			const body = {
+				username: "Michael",
+				password: "MyPassWordHere"
+			};
+			const createdUser = await Users.create(body);
+			const res = await request(server)
+				.post("/api/auth/login")
+				.send({ ...body, password: "WRONG" });
+
+			expect(res.status).toBe(400);
+		});
+
+		it("should return status 404 if no account with username is found", async () => {
+			const body = {
+				username: "notReal",
+				password: "fake"
+			};
+			const res = await request(server)
+				.post("/api/auth/login")
+				.send(body);
+
+			expect(res.status).toBe(404);
+		});
+
+		it("should return status 200, the user object, and a JWT token on successful login", async () => {
+			//Create a user so we can test logging in
+			const body = {
+				username: "Michael",
+				password: "MyPassWordHere"
+			};
+			const createdUser = await Users.create(body);
+			const res = await request(server)
+				.post("/api/auth/login")
+				.send(body);
+
+			expect(res.status).toBe(200);
+			//Check if user object matches createdUser credentials.
+			//Also check if token is a string and NOT null.
+			expect(res.body.user.id).toEqual(createdUser.id);
+			expect(res.body.user.username).toEqual(createdUser.username);
+			expect(typeof res.body.token).toEqual('string');
 		});
 	});
 });
