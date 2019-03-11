@@ -3,11 +3,12 @@ const Posts = require("./index");
 const Users = require("../usersModel");
 const faker = require("faker");
 
+afterEach(async () => {
+	await db("posts").del();
+	await db("users").del();
+});
+
 describe("Posts Model Functions", () => {
-	afterEach(async () => {
-		await db("posts").del();
-		await db("users").del();
-	});
 	describe("create()", () => {
 		it("should create a post in the database based on the provided post object", async () => {
 			//Create user. Users model is already tested, so we are just using it to provide a valid Foreign Key to the created post.

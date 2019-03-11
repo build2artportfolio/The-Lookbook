@@ -6,8 +6,8 @@
 	"scripts": {
 		"start": "node index.js",
 		"dev": "nodemon index.js",
-		"test": "cross-env DB_ENV=testing jest --watch --verbose",
-		"testonce": "cross-env DB_ENV=testing jest --verbose"
+		"test": "cross-env DB_ENV=testing jest --watch --verbose --runInBand",
+		"testonce": "cross-env DB_ENV=testing jest --verbose --runInBand"
 	},
 	"dependencies": {
 		"bcryptjs": "^2.4.3",
