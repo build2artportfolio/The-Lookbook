@@ -38,6 +38,14 @@ const get = async (perPage, page) => {
 	const posts = await db("posts")
 		.offset(perPage * page)
 		.limit(perPage);
+	//Refactor into using innerJoins when limit bug is fixed.
+	for (let i = 0; i < posts.length; i++) {
+		let user = await db("users")
+			.select("id", "username")
+			.where({ id: posts[i].artistId })
+			.first();
+		posts[i].artist = user;
+	}
 	const pagesObject = {
 		totalPosts: Number(totalPosts.count),
 		posts

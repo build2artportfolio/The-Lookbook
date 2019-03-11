@@ -7,6 +7,7 @@ const helmet = require("helmet");
 const morgan = require("morgan");
 
 const authRoutes = require("./routes/auth");
+const postRoutes = require("./routes/posts");
 
 server.use(express.json());
 server.use(cors());
@@ -18,5 +19,6 @@ server.get("/api", (req, res) => {
 });
 
 server.use("/api/auth", authRoutes);
+server.use("/api/posts", postRoutes);
 
 module.exports = server;

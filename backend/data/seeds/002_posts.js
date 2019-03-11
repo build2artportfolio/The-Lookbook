@@ -29,7 +29,6 @@ exports.seed = async function(knex, Promise) {
 	return knex("posts")
 		.del()
 		.then(function() {
-			console.log(seeds);
 			return knex("posts").insert(seeds);
 		});
 };

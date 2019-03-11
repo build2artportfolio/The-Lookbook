@@ -7,6 +7,7 @@ const faker = require("faker");
 //After each test, reset the users table.
 afterEach(async () => {
 	await db("posts").del();
+	await db("users").del();
 });
 
 describe("Post Routes", () => {
@@ -43,8 +44,8 @@ describe("Post Routes", () => {
 			await db("posts").insert(genPosts);
 			const res = await request(server)
 				.get("/api/posts")
-				.set("Page-Size", 17)
-				.set("Page", 5);
+				.set("pagesize", "17")
+				.set("page", "4");
 			expect(res.body.totalPosts).toBe(100);
 			expect(res.body.posts.length).toBe(17);
 		});
