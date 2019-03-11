@@ -48,5 +48,11 @@ describe("Users Model Functions", () => {
 			const fetchNoUser = await Users.getOne({ id: 0 });
 			expect(fetchNoUser).toBe(null);
 		});
+
+		it("returns null if no filter parameter is provided", async () => {
+			//If no filter is provided to the getOne parameter, it should return null.
+			const fetchWithNoFilter = await Users.getOne();
+			expect(fetchWithNoFilter).toBe(null);
+		});
 	});
 });

@@ -11,6 +11,17 @@ const create = async user => {
 	return createdUser;
 };
 
+const getOne = async filter => {
+	//Return null if no filter is provided. Otherwise return the user if one is found, or null if none were found.
+	if (!filter) return null;
+	const foundUser = await db("users")
+		.where(filter)
+		.first();
+	if (!foundUser) return null;
+	return foundUser;
+};
+
 module.exports = {
-	create
+	create,
+	getOne
 };
