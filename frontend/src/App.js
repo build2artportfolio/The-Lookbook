@@ -10,13 +10,12 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Link to="/public">Public Page for Viewers</Link>
-          <Link to="/login">Protected Page for Signed in Artist </Link>
-          {/* This will link to PrivateRoute when the components is created.
-          PrivateRoute will route to /login if there isn't a user signed in */}
-
+          <div className="Navbar">
+            <Link to="/public">Public Page for Viewers</Link>
+            <Link to="/protected">Login or Register</Link>
+          </div>
           <Route path="/login" component={Login} />
-          {/* <PrivateRoute path="/protected" component={Protected} /> */}
+          <PrivateRoute path="/protected" component={Protected} />
         </div>
       </Router>
     );

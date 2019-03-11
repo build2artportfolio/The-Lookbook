@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { login } from '../actions';
+import { Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 class Login extends React.Component {
   state = {
     credentials: {
       username: 'David',
-      password: 'nicephotos'
+      password: 'password'
     }
   };
 
@@ -25,30 +26,41 @@ class Login extends React.Component {
     });
   };
 
+
   render() {
+    let error_style = {};
+    this.props.error ? error_style = { display: 'block' } : error_style = { display: 'none' };
     return (
-      <div>
-        <form onSubmit={this.login}>
-          <input
-            type="text"
+      <div className="LoginForm">
+          <Form onSubmit={this.login}>
+        <FormGroup>
+          <Label>Username</Label>
+          <Input type="text"
             name="username"
             value={this.state.credentials.username}
-            onChange={this.handleChange}
-          />
-          <input
-            type="password"
+            onChange={this.handleChange} />
+        </FormGroup>
+        <FormGroup>
+          <Label>Password</Label>
+          <Input type="password"
             name="password"
             value={this.state.credentials.password}
-            onChange={this.handleChange}
-          />
-          <button>Log in</button>
-        </form>
+            onChange={this.handleChange} />
+        </FormGroup>
+          <Button color="primary">Log in</Button>
+          <Alert style={error_style} color="danger">{this.props.error}</Alert>
+        </Form>
+        
       </div>
     );
   }
 }
 
+const mapStateToProps = state => ({
+  error: state.error
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { login }
 )(Login);
