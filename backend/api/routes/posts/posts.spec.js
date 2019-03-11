@@ -66,13 +66,28 @@ describe("Post Routes", () => {
 		});
 
 		it("should return status 422 if no title or image provided", async () => {
+			//Create user. Users model is already tested, so we are just using it to provide a valid Foreign Key to the created posts.
+			const user = await Users.create({
+				username: "Michael",
+				password: "test"
+			});
+			//Now create a JWT for the users authentication, just for testing the API's response.
+			const payload = {
+				id: user.id,
+				username: user.username
+			};
+			const token = await jwt.sign(payload, process.env.JWT_SECRET, {
+				expiresIn: "1d"
+			});
+			//
 			let newPost = {
 				title: faker.lorem.words(),
 				description: faker.lorem.sentence()
 			};
 			const res = await request(server)
 				.post("/api/posts")
-				.send(newPost);
+				.send(newPost)
+				.set("authorization", token);
 			expect(res.status).toBe(422);
 		});
 
@@ -100,7 +115,8 @@ describe("Post Routes", () => {
 				.post("/api/posts")
 				.send(newPost)
 				.set("authorization", token);
-			expect(res.status).toBe(422);
+			console.log("5");
+			expect(res.status).toBe(201);
 		});
 	});
 });
