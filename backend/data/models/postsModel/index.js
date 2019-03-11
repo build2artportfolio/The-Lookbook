@@ -16,6 +16,22 @@ const create = async post => {
 	return createdPost;
 };
 
+const getOne = async filter => {
+	if (!filter) return null;
+	const foundPost = await db("posts")
+		.where(filter)
+		.first();
+	if (!foundPost) return null;
+	const artist = await db("users")
+		.select("id", "username")
+		.where({ id: foundPost.artistId })
+		.first();
+	foundPost.artist = artist;
+	delete foundPost.artistId;
+	return foundPost;
+};
+
 module.exports = {
-	create
+	create,
+	getOne
 };
