@@ -107,17 +107,18 @@ describe("Auth Routes", () => {
 				username: "Michael",
 				password: "MyPassWordHere"
 			};
-			const createdUser = await Users.create(body);
+			//API compares password hash to submitted password, so we must create a user with a hashed password.
+			const createUserRequest = await request(server)
+				.post("/api/auth/register")
+				.send(body);
 			const res = await request(server)
 				.post("/api/auth/login")
 				.send(body);
-
 			expect(res.status).toBe(200);
-			//Check if user object matches createdUser credentials.
+			//Check if user object matches the created users credentials.
 			//Also check if token is a string and NOT null.
-			expect(res.body.user.id).toEqual(createdUser.id);
-			expect(res.body.user.username).toEqual(createdUser.username);
-			expect(typeof res.body.token).toEqual('string');
+			expect(res.body.user.username).toEqual(body.username);
+			expect(typeof res.body.token).toEqual("string");
 		});
 	});
 });

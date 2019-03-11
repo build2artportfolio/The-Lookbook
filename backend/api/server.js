@@ -1,3 +1,5 @@
+require("dotenv").config(); //Load environment variables. We do this in server.js instead of index.js because the test suite imports server.js, not index.js
+
 const express = require("express");
 const server = express();
 const cors = require("cors");
