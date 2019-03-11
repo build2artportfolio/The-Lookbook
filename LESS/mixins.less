@@ -11,18 +11,32 @@
     margin: 10px 0;
     cursor: pointer;
     width: 10%;
-    padding: 10px 5%;
+    padding: 10px 0;
     font-size: 1.75rem;
     border-radius: 10px;
     text-align: center;
     justify-content: center;
-  
+    border: 1px solid black;
+
     &:hover {
       color: @bg-color;
       background-color: @font-color;
     }
   }
 
+
+// Easymode flexbox
+.flex(@jc: none, @ai: none, @dir: row) {
+  display: flex;
+  justify-content: @jc;
+  align-items: @ai;
+  flex-direction: @dir;
+}
+
+// Width
+.width-100 {
+  width: 100%;
+}
 
 // Dont have to use this, made a disco ball mixin for preprocessing week and I am a big fan.
 // took out the strobe half of it and just left the glow so its less obnoxious but still cool.
