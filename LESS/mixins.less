@@ -1,0 +1,37 @@
+// Mixins in here
+
+.btn {
+    .my-button();
+    .glow();
+}
+// colors are just arbitrary soft colors atm. Open to change.
+.my-button(@bg-color: lightblue, @font-color: pink) {
+    color: @font-color;
+    background-color: @bg-color;
+    margin: 10px 0;
+    cursor: pointer;
+    width: 90%;
+    padding: 10px 5%;
+    font-size: 1.75rem;
+    border-radius: 10px;
+    text-align: center;
+  
+    &:hover {
+      color: @bg-color;
+      background-color: @font-color;
+    }
+  }
+
+
+// Dont have to use this, made a disco ball mixin for preprocessing week and I am a big fan.
+// took out the strobe half of it and just left the glow so its less obnoxious but still cool.
+.glow () {
+    animation: glow 500ms infinite;
+
+    @keyframes glow {
+    0% { box-shadow: 0 0 -10px red; }
+    40% { box-shadow: 0 0 20px blue; }
+    60% { box-shadow: 0 0 20px purple; }
+    100% { box-shadow: 0 0 -10px aqua; }
+  }
+}
