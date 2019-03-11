@@ -200,10 +200,18 @@ footer a {
   justify-content: center;
   align-items: center;
   flex-direction: row;
-  width: 100%;
+  width: 45%;
   background-color: white;
   border: 2px solid black;
   border-radius: 10px;
+  font-size: 1.15rem;
+}
+.posts h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.posts p {
+  line-height: 1.5;
 }
 * {
   box-sizing: border-box;
