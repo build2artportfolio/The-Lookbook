@@ -52,4 +52,31 @@ router.post("/", authenticate, async (req, res) => {
 	}
 });
 
+router.put("/:id", authenticate, async (req, res) => {
+	const { title, description, image } = req.body;
+	if (!title && !description)
+		return res.status(422).json({
+			message: "You must provide a title or description to update a post with."
+		});
+	if (image)
+		return res.status(422).json({
+			message:
+				"We do not allow image edits. Please upload the image you want instead."
+		});
+	let newProps = {};
+	if (title) {
+		newProps.title = title;
+	}
+	if (description) {
+		newProps.description = description;
+	}
+
+	try {
+		const updatedPost = await Posts.update(req.params.id, newProps);
+		return res.status(201).json(updatedPost);
+	} catch (error) {
+		return res.status(500).json({ message: "Internal error." });
+	}
+});
+
 module.exports = router;

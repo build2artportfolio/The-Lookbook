@@ -151,12 +151,12 @@ describe("Post Routes", () => {
 				description: faker.lorem.sentence()
 			};
 			const res = await request(server)
-				.put("/api/put/1")
+				.put("/api/posts/1")
 				.send(newProps);
 			expect(res.status).toBe(401);
 		});
 
-		it("should return status 422 if no title or image provided", async () => {
+		it("should return status 422 if no title or description provided", async () => {
 			//Create user. Users model is already tested, so we are just using it to provide a valid Foreign Key to the created posts.
 			const user = await Users.create({
 				username: "Michael",
@@ -206,11 +206,11 @@ describe("Post Routes", () => {
 				title: "NEW TITLE NOW"
 			};
 			const res = await request(server)
-				.post(`/api/posts/${newPost.id}`)
+				.put(`/api/posts/${newPost.id}`)
 				.send(newProps)
 				.set("authorization", token);
 			expect(res.status).toBe(201);
-			expect(res.body).toEqual({ ...newPost, ...newProps });
+			expect(res.body.title).toEqual(newProps.title);
 		});
 	});
 });
