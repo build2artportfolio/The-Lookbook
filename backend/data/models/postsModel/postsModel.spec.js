@@ -146,6 +146,32 @@ describe("Posts Model Functions", () => {
 			expect(updatedPost).toBe(null);
 		});
 	});
+
+	describe("del()", () => {
+		it("should return true if delete worked", async () => {
+			//Create user. Users model is already tested, so we are just using it to provide a valid Foreign Key to the created post.
+			const user = await Users.create({
+				username: "Michael",
+				password: "test"
+			});
+			const postObject = {
+				title: faker.lorem.words(),
+				description: faker.lorem.sentence(),
+				imageUrl: faker.image.imageUrl(),
+				artistId: user.id
+			};
+			const createdPost = await Posts.create(postObject);
+			//Delete post
+			const deleted = await Posts.del(createdPost.id);
+			expect(deleted).toBe(true);
+		});
+
+		it("should return null if no record was deleted", async () => {
+			//Post ID incrementation begins at 1, so we know nothing exists with the ID of 0.
+			const deleted = await Posts.del(0);
+			expect(deleted).toBe(null);
+		});
+	});
 });
 
 const generatePosts = (amount, userId) => {
