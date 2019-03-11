@@ -52,6 +52,31 @@ describe("Post Routes", () => {
 		});
 	});
 
+	describe("GET /:id", () => {
+		it("should return status 404 if no post found", async () => {
+			//Our Posts ID incrementation starts at 1, so we know none will have the ID of 0.
+			const res = await request(server).get("/api/posts/0");
+			expect(res.status).toBe(404);
+		});
+
+		it("should return status 200, and the post if it is found", async () => {
+			//Create user. Users model is already tested, so we are just using it to provide a valid Foreign Key to the created posts.
+			const user = await Users.create({
+				username: "Michael",
+				password: "test"
+			});
+			//Generate posts with fakerJS
+			const genPosts = await generatePosts(3, user.id);
+			//insert generated posts for testing the API response.
+			await db("posts").insert(genPosts);
+			//Get one of the posts we just generated.
+			const res = await request(server).get(`/api/posts/${genPosts[0].id}`);
+			const foundPost = await Posts.getOne({ id: genPosts[0].id });
+			expect(res.status).toBe(200);
+			expect(res.body).toEqual(foundPost);
+		});
+	});
+
 	describe("POST /", () => {
 		it("should return status 401 if no JWT token in headers", async () => {
 			let newPost = {
