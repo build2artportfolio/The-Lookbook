@@ -1,6 +1,6 @@
 .btn {
-  color: pink;
-  background-color: lightblue;
+  color: black;
+  background-color: lightgrey;
   margin: 10px 0;
   cursor: pointer;
   width: 10%;
@@ -11,8 +11,8 @@
   justify-content: center;
 }
 .btn:hover {
-  color: lightblue;
-  background-color: pink;
+  color: lightgrey;
+  background-color: black;
 }
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
@@ -187,6 +187,9 @@ footer a {
 }
 .bottom-content p {
   line-height: 1;
+}
+.main-content {
+  background: #ecddab;
 }
 * {
   box-sizing: border-box;
