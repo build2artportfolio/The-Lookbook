@@ -11,7 +11,7 @@ describe("Users Model Functions", () => {
 		it("creates a user in the database based on provided user object", async () => {
 			const newUser = {
 				username: "Michael",
-				password: "testpass"
+				password: "testpass" //This will be a hashed password. But we are not testing our password hashing, simply the create user method.
 			};
 			const createdUser = await Users.create(newUser);
 			//Expect that the new created user has an id from createdUser, then the username and password provided from newUser object/Passed in user object.
