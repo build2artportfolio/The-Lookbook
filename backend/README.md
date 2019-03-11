@@ -34,10 +34,8 @@
 
 ```
 {
-    {
-        username: "JohnDoe",
-        password: "SecretPassWord"
-    }
+    username: "JohnDoe",
+    password: "SecretPassWord"
 }
 ```
 
