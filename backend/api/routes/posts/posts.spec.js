@@ -140,7 +140,6 @@ describe("Post Routes", () => {
 				.post("/api/posts")
 				.send(newPost)
 				.set("authorization", token);
-			console.log("5");
 			expect(res.status).toBe(201);
 		});
 	});
