@@ -5,7 +5,9 @@
 - `JWT_SECRET` Any string, must be consistent per JWT Token.
 - `DATABASE_URL` PostgreSQL connection string. Provided by Heroku if you have a PostgreSQL addon.
 
-## Endpoints
+# Endpoints
+
+## Authentication Endpoints
 
 ### POST /api/auth/register
 
@@ -53,3 +55,81 @@
 
 - NOTE - Token expires after 24 hours of creation.
 - Use the `token` in future requests that require authentication in the `authorization` header.
+
+## Artist Post Endpoints
+
+### GET /api/posts
+
+- Returns an object with the total amount of posts, and the posts for the specified page.
+- You can set the `pagesize` header for the amount of posts per page.
+- You can set the `page` header for the page of posts you want to see. (page results depend on the pagesize value)
+- `pagesize` is default at 20
+- `page` is default at 0
+
+- Response Example:
+
+`Shortened posts array in response to save page space.`
+
+```
+{
+    "totalPosts": 25,
+    "posts": [
+        {
+            "id": 5,
+            "title": "officiis porro iusto",
+            "description": "Similique minima culpa neque.",
+            "imageUrl": "http://lorempixel.com/640/480",
+            "artistId": 5,
+            "created_at": "2019-03-11T20:28:52.368Z",
+            "updated_at": "2019-03-11T20:28:52.368Z",
+            "artist": {
+                "id": 5,
+                "username": "Janet"
+            }
+        },
+        {
+            "id": 6,
+            "title": "in unde debitis",
+            "description": "Atque soluta doloribus explicabo impedit.",
+            "imageUrl": "http://lorempixel.com/640/480",
+            "artistId": 1,
+            "created_at": "2019-03-11T20:28:52.368Z",
+            "updated_at": "2019-03-11T20:28:52.368Z",
+            "artist": {
+                "id": 1,
+                "username": "Bob"
+            }
+        }
+    ]
+}
+```
+
+### POST /api/posts
+
+_JWT Token Required in `authorization` header_
+
+- Request Example (Logged in as `Bob`):
+
+```
+    title: "in unde debitis",
+    description: "Atque soluta doloribus explicabo impedit.",
+    image: "http://lorempixel.com/640/480",
+```
+
+- Response Example:
+
+```
+{
+    "id": 6,
+    "title": "in unde debitis",
+    "description": "Atque soluta doloribus explicabo impedit.",
+    "imageUrl": "http://lorempixel.com/640/480",
+    "artistId": 1,
+    "created_at": "2019-03-11T20:28:52.368Z",
+    "updated_at": "2019-03-11T20:28:52.368Z",
+    "artist": {
+        "id": 1,
+        "username": "Bob"
+    }
+}
+```
