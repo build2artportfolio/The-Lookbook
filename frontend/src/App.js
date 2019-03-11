@@ -10,8 +10,10 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Link to="/public">Public Page for Viewers</Link>
-          <Link to="/protected">Login or Register</Link>
+          <div className="Navbar">
+            <Link to="/public">Public Page for Viewers</Link>
+            <Link to="/protected">Login or Register</Link>
+          </div>
           <Route path="/login" component={Login} />
           <PrivateRoute path="/protected" component={Protected} />
         </div>
