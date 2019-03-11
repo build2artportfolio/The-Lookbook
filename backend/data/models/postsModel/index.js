@@ -63,9 +63,19 @@ const update = async (id, props) => {
 	return updatedPost;
 };
 
+const del = async id => {
+	if (!id) return null;
+	const [deleted] = await db("posts")
+		.where({ id })
+		.del("id");
+	if (!deleted) return null;
+	return true;
+};
+
 module.exports = {
 	create,
 	getOne,
 	get,
-	update
+	update,
+	del
 };
