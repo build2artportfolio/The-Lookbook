@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { signUp } from '../actions';
+//import styled from 'styled-components';
+import { Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 class SignUp extends React.Component {
   state = {
@@ -18,7 +20,7 @@ class SignUp extends React.Component {
       }
     });
   };
-  
+
   signUp = e => {
     e.preventDefault();
     this.props.signUp(this.state.credentials).then(() => {
@@ -29,8 +31,33 @@ class SignUp extends React.Component {
 
   render() {
     return (
-      <div>
-          
+      <div className='signup-form'>
+        <Form onSubmit={this.signUp}>
+          <FormGroup>
+            <Label>Username</Label>
+            <Input type="text"
+              name="username"
+              value={this.state.credentials.username}
+              onChange={this.handleChange} />
+          </FormGroup>
+          <FormGroup>
+            <Label>Password</Label>
+            <Input type="password"
+              name="password"
+              value={this.state.credentials.password}
+              onChange={this.handleChange} />
+          </FormGroup>
+          <FormGroup>
+            <Label>Confirm Password</Label>
+            <Input type="password"
+              name="password"
+              // State check required
+              value={this.state.credentials.password}
+              onChange={this.handleChange} />
+          </FormGroup>
+          <Button color="primary">Sign Up</Button>
+          <Alert style={error_style} color="danger">{this.props.error}</Alert>
+        </Form>
       </div>
     );
   }
