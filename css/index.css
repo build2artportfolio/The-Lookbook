@@ -215,6 +215,10 @@ footer strong {
   margin: auto;
   margin-bottom: 1%;
 }
+.first-post .title-post {
+  width: 100%;
+  text-align: center;
+}
 .first-post h1 {
   font-size: 2rem;
   font-weight: bold;
