@@ -32,16 +32,16 @@ describe("Users Model Functions", () => {
 			const createdUser = await Users.create(newUser);
 			//Here we test if the filter passed into our getOne method works for one, or multiple properties.
 			const fetchById = await Users.getOne({ id: createdUser.id });
-			expect(fetchById).toEqual(createdUser);
+			expect(fetchById).toEqual({ ...createdUser, posts: [] });
 			const fetchByUsername = await Users.getOne({
 				username: createdUser.username
 			});
-			expect(fetchByUsername).toEqual(createdUser);
+			expect(fetchByUsername).toEqual({ ...createdUser, posts: [] });
 			const fetchByIdAndUsername = await Users.getOne({
 				id: createdUser.id,
 				username: createdUser.username
 			});
-			expect(fetchByIdAndUsername).toEqual(createdUser);
+			expect(fetchByIdAndUsername).toEqual({ ...createdUser, posts: [] });
 		});
 
 		it("returns null if no user is found", async () => {
@@ -69,7 +69,7 @@ describe("Users Model Functions", () => {
 				about: "About me CHANGED."
 			};
 			const updatedUser = await Users.update(user.id, updateProps);
-			expect(updatedUser).toEqual({ ...user, ...updateProps });
+			expect(updatedUser).toEqual({ ...user, ...updateProps, posts: [] });
 		});
 
 		it("should return null if nothing was updated", async () => {

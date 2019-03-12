@@ -109,7 +109,7 @@ describe("Posts Model Functions", () => {
 		});
 	});
 
-	describe("getByArtist()", () => {
+	describe("getByArtistId()", () => {
 		it("should return posts only by the artist", async () => {
 			//Create user. Users model is already tested, so we are just using it to provide a valid Foreign Key to the created post.
 			const user = await Users.create({

@@ -54,6 +54,13 @@ const get = async (perPage, page) => {
 	return pagesObject;
 };
 
+const getByArtistId = async id => {
+	const posts = await db("posts")
+		.where({ artistId: id })
+		.orderBy("created_at", "desc");
+	return posts;
+};
+
 const update = async (id, props) => {
 	if (!id || !props) return null;
 	const [updatedPostId] = await db("posts")
@@ -77,6 +84,7 @@ module.exports = {
 	create,
 	getOne,
 	get,
+	getByArtistId,
 	update,
 	del
 };

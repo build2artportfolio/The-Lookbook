@@ -1,4 +1,5 @@
 const db = require("../../database");
+const Posts = require("../postsModel");
 
 const create = async user => {
 	//Destructure the created users ID from the array received from the insert method.
@@ -18,6 +19,8 @@ const getOne = async filter => {
 		.where(filter)
 		.first();
 	if (!foundUser) return null;
+	const userPosts = await Posts.getByArtistId(foundUser.id);
+	foundUser.posts = userPosts;
 	return foundUser;
 };
 
