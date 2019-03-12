@@ -6,32 +6,24 @@
 }
 // colors are just arbitrary soft colors atm. Open to change.
 .my-button(@bg-color: lightgrey, @font-color: black) {
-    color: @font-color;
-    background-color: @bg-color;
-    margin: 10px 0;
-    cursor: pointer;
-    width: 10%;
-    padding: 10px 0;
-    font-size: 1.75rem;
-    border-radius: 10px;
-    text-align: center;
-    justify-content: center;
-    border: 1px solid black;
+  color: @font-color;
+  background-color: @bg-color;
+  margin: 10px 0;
+  cursor: pointer;
+  width: 10%;
+  padding: 10px 0;
+  font-size: 1.75rem;
+  border-radius: 10px;
+  text-align: center;
+  justify-content: center;
+  border: 1px solid black;
 
-    &:hover {
-      color: @bg-color;
-      background-color: @font-color;
-    }
+  &:hover {
+    color: @bg-color;
+    background-color: @font-color;
   }
-
-
-// Easymode flexbox
-.flex(@jc: none, @ai: none, @dir: row) {
-  display: flex;
-  justify-content: @jc;
-  align-items: @ai;
-  flex-direction: @dir;
 }
+
 
 // Width
 .width-100 {
