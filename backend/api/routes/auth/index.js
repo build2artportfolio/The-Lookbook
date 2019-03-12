@@ -64,6 +64,7 @@ router.post("/register", async (req, res) => {
 			.status(201)
 			.json({ message: "Successfully registered account." });
 	} catch (error) {
+		console.log(error);
 		if (error.code === "23505") {
 			return res
 				.status(400)
