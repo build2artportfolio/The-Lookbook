@@ -109,6 +109,24 @@ describe("Posts Model Functions", () => {
 		});
 	});
 
+	describe("getByArtistId()", () => {
+		it("should return posts only by the artist", async () => {
+			//Create user. Users model is already tested, so we are just using it to provide a valid Foreign Key to the created post.
+			const user = await Users.create({
+				username: "Michael",
+				password: "test"
+			});
+			//Generate posts with fakerJS
+			const genPosts = await generatePosts(100, user.id);
+			//insert generated posts
+			await db("posts").insert(genPosts);
+			//Execute Posts.get with pagination values
+			const fetchedPosts = await Posts.getByArtistId(user.id);
+			//Test if the properties are accurate compared to the posts we generated.
+			expect(fetchedPosts.length).toBe(100);
+		});
+	});
+
 	describe("update()", () => {
 		it("should return the updated record based on the properties to update passed to it.", async () => {
 			//Create user. Users model is already tested, so we are just using it to provide a valid Foreign Key to the created post.
@@ -130,7 +148,7 @@ describe("Posts Model Functions", () => {
 
 		it("should return null if nothing was updated", async () => {
 			const updateProps = { title: `Pranked, this isn't real.` };
-			const updatedPost = await Posts.update(5, updateProps);
+			const updatedPost = await Posts.update(0, updateProps);
 			expect(updatedPost).toBe(null);
 		});
 	});
