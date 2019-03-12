@@ -72,9 +72,16 @@ router.put("/:id", authenticate, async (req, res) => {
 	}
 
 	try {
+		const findPost = await Posts.getOne({ id: req.params.id });
+		if (req.user.id !== findPost.artist.id) {
+			return res
+				.status(403)
+				.json({ message: "You do not have permission to modify this post." });
+		}
 		const updatedPost = await Posts.update(req.params.id, newProps);
 		return res.status(201).json(updatedPost);
 	} catch (error) {
+		console.log(error);
 		return res.status(500).json({ message: "Internal error." });
 	}
 });

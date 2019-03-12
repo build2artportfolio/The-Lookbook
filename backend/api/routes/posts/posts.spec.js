@@ -183,6 +183,40 @@ describe("Post Routes", () => {
 			expect(res.status).toBe(422);
 		});
 
+		it("should return status 403 and the updated post with successful authentication but no authorization", async () => {
+			//Create user. Users model is already tested, so we are just using it to provide a valid JWT.
+			const user = await Users.create({
+				username: "Michael",
+				password: "test"
+			});
+
+			const user2 = await Users.create({
+				username: "JohnDoe",
+				password: "test"
+			});
+			//Now create a JWT for the users authentication, just for testing the API's response.
+			const payload = {
+				id: user.id,
+				username: user.username
+			};
+			const token = await jwt.sign(payload, process.env.JWT_SECRET, {
+				expiresIn: "1d"
+			});
+			//Generate posts with fakerJS
+			const genPosts = await generatePosts(1, user2.id);
+			//insert generated posts for testing the API response.
+			const newPost = await Posts.create(genPosts[0]);
+			//Set properties to update
+			const newProps = {
+				title: "NEW TITLE NOW"
+			};
+			const res = await request(server)
+				.put(`/api/posts/${newPost.id}`)
+				.send(newProps)
+				.set("authorization", token);
+			expect(res.status).toBe(403);
+		});
+
 		it("should return status 201 and the updated post with successful authentication", async () => {
 			//Create user. Users model is already tested, so we are just using it to provide a valid JWT.
 			const user = await Users.create({
