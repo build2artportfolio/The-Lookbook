@@ -56,4 +56,29 @@ describe("Users Model Functions", () => {
 			expect(fetchWithNoFilter).toBe(null);
 		});
 	});
+
+	describe("update()", () => {
+		it("should return the updated record based on the properties to update passed to it.", async () => {
+			//Create user. Users model is already tested, so we are just using it to provide a valid Foreign Key to the created post.
+			const user = await Users.create({
+				username: "Michael",
+				password: "test"
+			});
+			const updateProps = {
+				username: "notMichaelAnymore",
+				about: "About me CHANGED."
+			};
+			const updatedUser = await Users.update(user.id, updateProps);
+			expect(updatedUser).toEqual({ ...user, ...updateProps });
+		});
+
+		it("should return null if nothing was updated", async () => {
+			const updateProps = {
+				username: "notMichaelAnymore",
+				about: "About me CHANGED."
+			};
+			const updatedUser = await Users.update(0, updateProps);
+			expect(updatedUser).toBe(null);
+		});
+	});
 });

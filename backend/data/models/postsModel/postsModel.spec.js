@@ -130,7 +130,7 @@ describe("Posts Model Functions", () => {
 
 		it("should return null if nothing was updated", async () => {
 			const updateProps = { title: `Pranked, this isn't real.` };
-			const updatedPost = await Posts.update(5, updateProps);
+			const updatedPost = await Posts.update(0, updateProps);
 			expect(updatedPost).toBe(null);
 		});
 	});
