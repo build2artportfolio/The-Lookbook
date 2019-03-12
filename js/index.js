@@ -19,48 +19,54 @@ navPro.addEventListener('click', function(){
 // DblClick Event Listener
 // Image Nullifier, removes images on dbl click. 
 // ****Might adjust to just get rid of "posts divs".****
-const imgNone = document.querySelectorAll('img');
+const postsNone = document.querySelectorAll('.posts');
 
-for(let i = 0; i < imgNone.length; i++){
-    imgNone[i].addEventListener('dblclick', function(){
-        imgNone[i].style.display = "none";
+for(let i = 0; i < postsNone.length; i++){
+    postsNone[i].addEventListener('dblclick', function(){
+        postsNone[i].style.display = "none";
     });
 };
 
 // Scroll Event Listener
 // creates a div in the form of a box, containing an ^, as you scroll.
 // Clicking on Div will bump you back to the top.
-let scrollY = 0; 
-scrollY = window.scrollY;
-    
-let div = document.createElement('div');
-document.body.append(div);
-div.id = "boxie";
-div.style.padding = "15px";
-div.style.color = "black";
-div.style.textAlign = "center";
-div.style.background = "rgb(239, 250, 253)"
-div.innerHTML = "Up";
-div.style.borderRadius = '10px';
-div.style.position = "fixed";
-div.style.right = "100px";
-div.style.bottom = " 100px";
-div.style.border = "1px solid black";
+var x = window.matchMedia("(min-width: 501px)")
 
-
-window.addEventListener('scroll', function(e){
+if(x.matches){
+    let scrollY = 0;
     scrollY = window.scrollY;
-    if(scrollY > 100){
-        document.getElementById('boxie').style.display = "block";
 
-    } else if (scrollY < 100) {
-        document.getElementById('boxie').style.display = "none";
-    }
-});
+    let div = document.createElement('div');
+    document.body.append(div);
+    div.id = "boxie";
+    div.style.padding = "10px";
+    div.style.color = "black";
+    div.style.textAlign = "center";
+    div.style.background = "rgb(239, 250, 253)"
+    div.innerHTML = "Up";
+    div.style.borderRadius = '10px';
+    div.style.position = "fixed";
+    div.style.right = "100px";
+    div.style.bottom = " 100px";
+    div.style.border = "1px solid black";
+    div.style.cursor = "pointer"
 
-div.addEventListener('click', function(){
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
-});
+
+    window.addEventListener('scroll', function(e){
+        scrollY = window.scrollY;
+        if(scrollY > 100){
+            document.getElementById('boxie').style.display = "block";
+
+        } else if (scrollY < 100) {
+            document.getElementById('boxie').style.display = "none";
+        }
+    });
+
+    div.addEventListener('click', function(){
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    });
+}
+
 
 // Other JavaScript Elements Here
