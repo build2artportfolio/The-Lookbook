@@ -186,7 +186,7 @@ table {
     flex-direction: column;
     width: 100%;
   }
-  .nav-bar {
+  .top-content .navigation .nav-bar {
     width: 80%;
     justify-content: space-between;
   }
@@ -293,6 +293,17 @@ footer strong {
     font-size: 1.15rem;
   }
 }
+@media ( max-width: 500px) {
+  .category-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 90%;
+    margin: auto;
+  }
+  .posts {
+    width: 100%;
+  }
+}
 .creator-container {
   display: flex;
   justify-content: space-evenly;
@@ -303,6 +314,17 @@ footer strong {
 .creators a {
   text-decoration: none;
   color: black;
+}
+@media ( max-width: 500px) {
+  .creator-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 90%;
+    margin: auto;
+  }
+  .creators {
+    width: 100%;
+  }
 }
 .about-title-post {
   width: 100%;

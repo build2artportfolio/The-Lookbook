@@ -64,3 +64,30 @@ div.addEventListener('click', function(){
 });
 
 // Other JavaScript Elements Here
+
+
+
+
+
+
+
+
+
+// Constructor function -> 1 option to hide the above scroll listener on mobile view.
+
+// class NewElement {
+//     constructor(element){
+
+//       this.element = element;
+  
+//       if(this.element.classList.contains('desktop')){
+//         this.element.addEventListener('click', () => this.function());
+//       } else {
+//       }
+//     }
+//     function() {
+//     }
+// }
+ 
+//   let element = document.querySelectorAll('.element');
+//   element.forEach(ele => new NewElement(ele)); 
