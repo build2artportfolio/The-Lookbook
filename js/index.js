@@ -17,7 +17,8 @@ navPro.addEventListener('click', function(){
 });
 
 // DblClick Event Listener
-// Image Nullifier!
+// Image Nullifier, removes images on dbl click. 
+// ****Might adjust to just get rid of "posts divs".****
 const imgNone = document.querySelectorAll('img');
 
 for(let i = 0; i < imgNone.length; i++){
@@ -27,7 +28,7 @@ for(let i = 0; i < imgNone.length; i++){
 };
 
 // Scroll Event Listener
-// creates a div in the form of a red box, containing UpDown, as you scroll.
+// creates a div in the form of a box, containing an ^, as you scroll.
 // Clicking on Div will bump you back to the top.
 let scrollY = 0; 
 scrollY = window.scrollY;
@@ -39,7 +40,7 @@ div.style.padding = "15px";
 div.style.color = "black";
 div.style.textAlign = "center";
 div.style.background = "rgb(239, 250, 253)"
-div.innerHTML = "^";
+div.innerHTML = "Up";
 div.style.borderRadius = '10px';
 div.style.position = "fixed";
 div.style.right = "100px";
@@ -62,13 +63,14 @@ div.addEventListener('click', function(){
     document.documentElement.scrollTop = 0;
 });
 
-//Prevent Default!
-// Cancels out the refresh on the anchortags
-const noRefresh = document.querySelectorAll('a');
-for(i = 0; i < noRefresh.length; i++){
-    noRefresh[i].addEventListener('click', function(e){
-        e.preventDefault();
-    });
-};
+//Prevent Default
+// Cancels out the refresh on the anchors
+// *********NEEDS TO BE REWRITEN OR BREAKS HOME/ABOUT/LOGIN***********Or just removed entirely.
+// const noRefresh = document.querySelectorAll('a');
+// for(i = 0; i < noRefresh.length; i++){
+//     noRefresh[i].addEventListener('click', function(e){
+//         e.preventDefault();
+//     });
+// };
 
 // Other JavaScript Elements Here
