@@ -61,8 +61,6 @@ router.put("/:id", authenticate, async (req, res) => {
 				.json({ message: "Incorrect password. Can not modify user." });
 		}
 	} catch (error) {
-		console.log(req.params.id);
-		console.log(error);
 		return res.status(500).json({ message: "Internal error." });
 	}
 });
