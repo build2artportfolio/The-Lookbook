@@ -4,10 +4,13 @@ import {
   LOGIN_ERROR,
   SIGNUP_START,
   SIGNUP_SUCCESS,
-  SIGNUP_ERROR
+  SIGNUP_ERROR,
+  GET_USER_POSTS_SUCCESS
 } from "../actions";
 
 const initialState = {
+  currentUser: {},
+  currentUserPosts: []
 };
 
 const reducer = (state = initialState, action) => {
@@ -19,6 +22,7 @@ const reducer = (state = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
+        currentUser: action.payload
       };
     case LOGIN_ERROR:
       return {
@@ -38,6 +42,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         signupmessage: action.payload
+      };
+    case GET_USER_POSTS_SUCCESS:
+      return {
+        ...state,
+        currentUserPosts: action.payload
       };
     default:
       return state;

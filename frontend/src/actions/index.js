@@ -8,22 +8,24 @@ export const SIGNUP_START = 'SIGNUP_START';
 export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_ERROR = 'SIGNUP_ERROR';
 
+export const GET_USER_POSTS_SUCCESS = 'GET_USER_POSTS_SUCCESS';
+
 export const login = creds => dispatch => {
   dispatch({ type: LOGIN_START });
   return axios.post('https://thelookbook-api.herokuapp.com/api/auth/login', creds)
     .then(res => {
       localStorage.setItem('token', res.data.token);
-      // dispatch({ type: LOGIN_SUCCESS, payload: });
-      // axios
-      //   .get('url', {
-      //     headers: { Authorization: localStorage.getItem('token') }
-      //   })
-      //   .then(res => {
-      //     dispatch();
-      //   })
-      //   .catch(err => {
-      //     console.log(err.message);
-      //   });
+      dispatch({ type: LOGIN_SUCCESS, payload: res.data.user});
+      axios
+        .get(`https://thelookbook-api.herokuapp.com/api/users/${res.data.user.id}`, {
+          headers: { Authorization: localStorage.getItem('token') }
+        })
+        .then(res => {
+          dispatch({ type: GET_USER_POSTS_SUCCESS, payload: res.data.posts});
+        })
+        .catch(err => {
+          console.log(err.response.data.message);
+        });
     })
     .catch(err => {
       console.log(err.response.data.message);

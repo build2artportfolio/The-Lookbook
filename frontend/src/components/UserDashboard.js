@@ -1,13 +1,28 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import {  } from '../actions';
+import {  } from 'reactstrap';
+import Post from './Post';
 
 class UserDashboard extends React.Component {
+    state = {
+    };
     render() {
         return (
-            <div>
-                Signed-in artist's portfolio is to be displayed here.
+            <div className='card_container'>
+                {this.props.posts.map(post => (
+                    <Post post={post}></Post>
+                ))}
             </div>
         );
     }
 }
 
-export default UserDashboard;
+const mapStateToProps = state => ({
+    posts: state.currentUserPosts
+  });
+  
+export default connect(
+    mapStateToProps,
+    { }
+  )(UserDashboard);
