@@ -248,3 +248,18 @@ _JWT Token Required in `authorization` header_
             "updated_at": "2019-03-12T00:31:35.608Z"
         },
 ```
+
+### DELETE /api/users/:id
+
+_JWT Token Required in `authorization` header_
+
+- Returns a message saying Deletion of account successful.
+- Can only delete your own account/the account you are logged in as.
+
+- Response Example:
+
+```
+{
+    message: "Account deleted."
+}
+```
