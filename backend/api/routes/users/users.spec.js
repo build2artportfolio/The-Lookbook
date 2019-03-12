@@ -168,4 +168,57 @@ describe("Users Routes", () => {
 			expect(res.body.about).toEqual(newProps.about);
 		});
 	});
+
+	describe("DELETE /:id", () => {
+		it("should return status 401 if no JWT token in headers", async () => {
+			const res = await request(server).delete("/api/users/1");
+			expect(res.status).toBe(401);
+		});
+
+		it("should return status 403 and the updated post with successful authentication but no authorization", async () => {
+			//Create user. Users model is already tested, so we are just using it to provide a valid JWT.
+			const user = await Users.create({
+				username: "Michael",
+				password: "test"
+			});
+
+			const user2 = await Users.create({
+				username: "JohnDoe",
+				password: "test"
+			});
+			//Now create a JWT for the users authentication, just for testing the API's response.
+			const payload = {
+				id: user.id,
+				username: user.username
+			};
+			const token = await jwt.sign(payload, process.env.JWT_SECRET, {
+				expiresIn: "1d"
+			});
+			const res = await request(server)
+				.delete(`/api/users/${user2.id}`)
+				.set("authorization", token);
+			expect(res.status).toBe(403);
+		});
+
+		it("should return status 201 and the updated user with successful authentication", async () => {
+			//Create user. Users model is already tested, so we are just using it to provide a valid JWT.
+			const user = await Users.create({
+				username: "Michael",
+				password: "test"
+			});
+			//Now create a JWT for the users authentication, just for testing the API's response.
+			const payload = {
+				id: user.id,
+				username: user.username
+			};
+			const token = await jwt.sign(payload, process.env.JWT_SECRET, {
+				expiresIn: "1d"
+			});
+			const res = await request(server)
+				.delete(`/api/users/${user.id}`)
+				.set("authorization", token);
+			expect(res.status).toBe(201);
+			expect(res.body.message).toBe("Account deleted.");
+		});
+	});
 });
