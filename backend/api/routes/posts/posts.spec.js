@@ -247,6 +247,73 @@ describe("Post Routes", () => {
 			expect(res.body.title).toEqual(newProps.title);
 		});
 	});
+
+	describe("DELETE /:id", () => {
+		it("should return status 401 if no JWT token in headers", async () => {
+			let newProps = {
+				title: faker.lorem.words(),
+				description: faker.lorem.sentence()
+			};
+			const res = await request(server)
+				.delete("/api/posts/1")
+				.send(newProps);
+			expect(res.status).toBe(401);
+		});
+
+		it("should return status 403 and the updated post with successful authentication but no authorization", async () => {
+			//Create user. Users model is already tested, so we are just using it to provide a valid JWT.
+			const user = await Users.create({
+				username: "Michael",
+				password: "test"
+			});
+
+			const user2 = await Users.create({
+				username: "JohnDoe",
+				password: "test"
+			});
+			//Now create a JWT for the users authentication, just for testing the API's response.
+			const payload = {
+				id: user.id,
+				username: user.username
+			};
+			const token = await jwt.sign(payload, process.env.JWT_SECRET, {
+				expiresIn: "1d"
+			});
+			//Generate posts with fakerJS
+			const genPosts = await generatePosts(1, user2.id);
+			//insert generated posts for testing the API response.
+			const newPost = await Posts.create(genPosts[0]);
+			const res = await request(server)
+				.delete(`/api/posts/${newPost.id}`)
+				.set("authorization", token);
+			expect(res.status).toBe(403);
+		});
+
+		it("should return status 200 and the deleted message with successful authentication", async () => {
+			//Create user. Users model is already tested, so we are just using it to provide a valid JWT.
+			const user = await Users.create({
+				username: "Michael",
+				password: "test"
+			});
+			//Now create a JWT for the users authentication, just for testing the API's response.
+			const payload = {
+				id: user.id,
+				username: user.username
+			};
+			const token = await jwt.sign(payload, process.env.JWT_SECRET, {
+				expiresIn: "1d"
+			});
+			//Generate posts with fakerJS
+			const genPosts = await generatePosts(1, user.id);
+			//insert generated posts for testing the API response.
+			const newPost = await Posts.create(genPosts[0]);
+			const res = await request(server)
+				.delete(`/api/posts/${newPost.id}`)
+				.set("authorization", token);
+			expect(res.status).toBe(201);
+			expect(res.body.title).toEqual(newProps.title);
+		});
+	});
 });
 
 const generatePosts = (amount, userId) => {
