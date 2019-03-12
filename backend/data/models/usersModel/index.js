@@ -21,7 +21,18 @@ const getOne = async filter => {
 	return foundUser;
 };
 
+const update = async (id, props) => {
+	if (!id || !props) return null;
+	const [updatedUserId] = await db("users")
+		.where({ id })
+		.update(props, "id");
+	if (!updatedUserId) return null;
+	const updatedUser = await getOne({ id: updatedUserId });
+	return updatedUser;
+};
+
 module.exports = {
 	create,
-	getOne
+	getOne,
+	update
 };
