@@ -310,8 +310,8 @@ describe("Post Routes", () => {
 			const res = await request(server)
 				.delete(`/api/posts/${newPost.id}`)
 				.set("authorization", token);
-			expect(res.status).toBe(201);
-			expect(res.body.title).toEqual(newProps.title);
+			expect(res.status).toBe(200);
+			expect(res.body).toEqual({ message: "Post deleted." });
 		});
 	});
 });

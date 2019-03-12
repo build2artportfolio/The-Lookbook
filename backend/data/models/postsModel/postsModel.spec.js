@@ -99,25 +99,13 @@ describe("Posts Model Functions", () => {
 			//insert generated posts
 			await db("posts").insert(genPosts);
 			//Set pagination values
-			const postsPerPage = 10;
-			const pageNumber = 2;
+			const postsPerPage = 5;
+			const pageNumber = 1;
 			//Execute Posts.get with pagination values
 			const fetchedPosts = await Posts.get(postsPerPage, pageNumber);
-			//Create expected object based on the generated posts.
-			const expected = {
-				totalPosts: 100,
-				posts: genPosts.slice(
-					pageNumber * postsPerPage,
-					pageNumber * postsPerPage + postsPerPage
-				)
-			};
 			//Test if the properties are accurate compared to the posts we generated.
 			expect(fetchedPosts.totalPosts).toBe(100);
-			expect(fetchedPosts.posts.length).toBe(10);
-			expect(fetchedPosts.posts[5]).toEqual({
-				...fetchedPosts.posts[5],
-				...expected.posts[5]
-			});
+			expect(fetchedPosts.posts.length).toBe(5);
 		});
 	});
 

@@ -81,7 +81,25 @@ router.put("/:id", authenticate, async (req, res) => {
 		const updatedPost = await Posts.update(req.params.id, newProps);
 		return res.status(201).json(updatedPost);
 	} catch (error) {
-		console.log(error);
+		return res.status(500).json({ message: "Internal error." });
+	}
+});
+
+router.delete("/:id", authenticate, async (req, res) => {
+	try {
+		const findPost = await Posts.getOne({ id: req.params.id });
+		if (req.user.id !== findPost.artist.id) {
+			return res
+				.status(403)
+				.json({ message: "You do not have permission to delete this post." });
+		}
+		const deletedPost = await Posts.del(req.params.id);
+		if (deletedPost) {
+			return res.status(200).json({ message: "Post deleted." });
+		} else {
+			return res.status(400).json({ message: "Error trying to delete post." });
+		}
+	} catch (error) {
 		return res.status(500).json({ message: "Internal error." });
 	}
 });
