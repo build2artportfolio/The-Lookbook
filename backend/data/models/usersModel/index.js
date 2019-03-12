@@ -1,4 +1,5 @@
 const db = require("../../database");
+const Posts = require("../postsModel");
 
 const create = async user => {
 	//Destructure the created users ID from the array received from the insert method.
@@ -18,10 +19,33 @@ const getOne = async filter => {
 		.where(filter)
 		.first();
 	if (!foundUser) return null;
+	const userPosts = await Posts.getByArtistId(foundUser.id);
+	foundUser.posts = userPosts;
 	return foundUser;
+};
+
+const update = async (id, props) => {
+	if (!id || !props) return null;
+	const [updatedUserId] = await db("users")
+		.where({ id })
+		.update(props, "id");
+	if (!updatedUserId) return null;
+	const updatedUser = await getOne({ id: updatedUserId });
+	return updatedUser;
+};
+
+const del = async id => {
+	if (!id) return null;
+	const [deleted] = await db("users")
+		.where({ id })
+		.del("id");
+	if (!deleted) return null;
+	return true;
 };
 
 module.exports = {
 	create,
-	getOne
+	getOne,
+	update,
+	del
 };
