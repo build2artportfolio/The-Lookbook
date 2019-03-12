@@ -108,6 +108,7 @@
 
 _JWT Token Required in `authorization` header_
 
+- Creates an Artist Post as the User you are logged in as.
 - Request Example (Logged in as `Bob`):
 
 ```
@@ -131,5 +132,50 @@ _JWT Token Required in `authorization` header_
         "id": 1,
         "username": "Bob"
     }
+}
+```
+
+### PUT /api/posts/:id
+
+_JWT Token Required in `authorization` header_
+
+- Updates the post based on the ID parameter provided.
+- You are not allowed to update the image property. Just create a new image instead.
+- Request Example (Logged in as `Bob`):
+
+```
+    title: "in unde debitis",
+    description: "Atque soluta doloribus explicabo impedit."
+```
+
+- Response Example:
+
+```
+{
+    "id": 6,
+    "title": "in unde debitis",
+    "description": "Atque soluta doloribus explicabo impedit.",
+    "imageUrl": "http://lorempixel.com/640/480",
+    "artistId": 1,
+    "created_at": "2019-03-11T20:28:52.368Z",
+    "updated_at": "2019-03-11T20:28:52.368Z",
+    "artist": {
+        "id": 1,
+        "username": "Bob"
+    }
+}
+```
+
+### DELETE /api/posts/:id
+
+_JWT Token Required in `authorization` header_
+
+- Deletes the post based on the ID parameter provided.
+
+- Response Example:
+
+```
+{
+    message: "Post deleted."
 }
 ```

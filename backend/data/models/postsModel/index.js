@@ -36,6 +36,7 @@ const get = async (perPage, page) => {
 		.count()
 		.first();
 	const posts = await db("posts")
+		.orderBy("created_at", "desc")
 		.offset(perPage * page)
 		.limit(perPage);
 	//Refactor into using innerJoins when limit bug is fixed.
