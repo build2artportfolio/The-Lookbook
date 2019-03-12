@@ -8,6 +8,7 @@ const morgan = require("morgan");
 
 const authRoutes = require("./routes/auth");
 const postRoutes = require("./routes/posts");
+const userRoutes = require("./routes/users");
 
 server.use(express.json());
 server.use(cors());
@@ -20,5 +21,6 @@ server.get("/api", (req, res) => {
 
 server.use("/api/auth", authRoutes);
 server.use("/api/posts", postRoutes);
+server.use("/api/users", userRoutes);
 
 module.exports = server;
