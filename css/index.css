@@ -311,6 +311,16 @@ footer strong {
 .creators {
   width: 100%;
 }
+.creators h3 {
+  padding: 10px 0;
+  font-weight: bold;
+}
+.creators p {
+  padding-bottom: 10px;
+}
+.creators li {
+  padding-bottom: 15px;
+}
 .creators a {
   text-decoration: none;
   color: black;
