@@ -3,11 +3,12 @@ const server = require("../../server");
 const db = require("../../../data/database");
 const Users = require("../../../data/models/usersModel");
 
+//After each test, reset the users table.
+afterEach(async () => {
+	await db("users").del();
+});
+
 describe("Auth Routes", () => {
-	//After each test, reset the users table.
-	afterEach(async () => {
-		await db("users").truncate();
-	});
 	describe("/register", () => {
 		it("should return Status 422 if no username or password is provided", async () => {
 			//Purposely don't provide password to test if we get 422 status code.
