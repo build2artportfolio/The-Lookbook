@@ -33,16 +33,15 @@ export const login = creds => dispatch => {
 
 export const signUp = creds => dispatch => {
   dispatch({ type: SIGNUP_START });
-  // This link may need to change for accurate linking
-  axios.post('https://thelookbook-api.herokuapp.com/api/auth/signup', creds)
+  return axios.post('https://thelookbook-api.herokuapp.com/api/auth/register', creds)
     .then(res => {
-      localStorage.setItem('token', res.data.token);
-      dispatch({ type: SIGNUP_SUCCESS, payload: res.data })
+      dispatch({ type: SIGNUP_SUCCESS, payload: res.data.message })
     })
     .catch(err => {
       console.log(err.response.data.message);
       dispatch({ type: SIGNUP_ERROR, payload: err.response.data.message });
     });
 };
+
 
 

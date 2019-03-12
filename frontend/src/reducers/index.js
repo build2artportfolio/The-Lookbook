@@ -8,7 +8,6 @@ import {
 } from "../actions";
 
 const initialState = {
-
 };
 
 const reducer = (state = initialState, action) => {
@@ -33,11 +32,12 @@ const reducer = (state = initialState, action) => {
     case SIGNUP_SUCCESS:
       return {
         ...state,
+        signupmessage: action.payload
       };
     case SIGNUP_ERROR:
       return {
         ...state,
-        error: action.payload
+        signupmessage: action.payload
       };
     default:
       return state;

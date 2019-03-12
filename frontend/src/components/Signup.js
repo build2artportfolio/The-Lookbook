@@ -7,7 +7,8 @@ class SignUp extends React.Component {
   state = {
     credentials: {
       username: '',
-      password: ''
+      password: '',
+      passwordcheck: ''
     }
   };
 
@@ -22,15 +23,22 @@ class SignUp extends React.Component {
 
   signUp = e => {
     e.preventDefault();
-    this.props.signUp(this.state.credentials).then(() => {
-      this.props.history.push('/protected');
+    this.props.signUp(this.state.credentials);
+    this.setState({
+      credentials: {
+        username: '',
+        password: '',
+        passwordcheck: ''
+      }
     });
   };
 
 
   render() {
-    let error_style = {};
-    this.props.error ? error_style = { display: 'block' } : error_style = { display: 'none' };
+    let message_style = {};
+    let passwordcheck_style = {};
+    this.props.signupmessage ? message_style = { display: 'block' } : message_style = { display: 'none' };
+    (this.state.credentials.passwordcheck.length > 0 && this.state.credentials.passwordcheck !== this.state.credentials.password) ? passwordcheck_style = { display: 'block' } : passwordcheck_style = { display: 'none' };
     return (
       <div className='SignupForm'>
         <Form onSubmit={this.signUp}>
@@ -51,13 +59,13 @@ class SignUp extends React.Component {
           <FormGroup>
             <Label>Confirm Password</Label>
             <Input type="password"
-              name="password"
-              // State check required
-              value={this.state.credentials.password}
+              name="passwordcheck"
+              value={this.state.credentials.passwordcheck}
               onChange={this.handleChange} />
+            <Alert style={passwordcheck_style} color="warning">Password does not match</Alert>
           </FormGroup>
           <Button color="primary">Sign Up</Button>
-          <Alert style={error_style} color="danger">{this.props.error}</Alert>
+          <Alert style={message_style} color="success">{this.props.signupmessage}</Alert>
         </Form>
       </div>
     );
@@ -65,7 +73,8 @@ class SignUp extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  error: state.error
+  error: state.error,
+  signupmessage : state.signupmessage
 });
 
 export default connect(
