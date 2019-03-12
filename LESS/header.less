@@ -1,4 +1,4 @@
-// Header contains the navigation tags, can include a title or logo or something as well if desired. 
+// Header contains the navigation tags all under the **.top-content class**, can include a title or logo or something as well if desired. 
 // The first "card/post" is the quick title into introduction section, can always shift that around.
 
 .top-content {
@@ -32,6 +32,31 @@
     }
 }
 
+// Mobile Responsiveness Styling
 
+@media @mobile {
+    .top-content {
+        display: flex;
+        align-items: center;
+        width: 100%;
+    }
+
+    .navigation {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+    }
+// need to space out the navigation section come back to me!!!!!!!!!!!!!
+    .nav-bar {
+        width: 80%;
+        justify-content: space-between;
+    }
+    
+    h1 {
+        padding-bottom: 2%;
+    }
+}
 
 

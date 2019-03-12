@@ -173,6 +173,27 @@ table {
   color: black;
   font-size: 1.25rem;
 }
+@media ( max-width: 500px) {
+  .top-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+  .navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+  }
+  .nav-bar {
+    width: 80%;
+    justify-content: space-between;
+  }
+  h1 {
+    padding-bottom: 2%;
+  }
+}
 footer {
   display: flex;
   justify-content: center;
@@ -196,6 +217,12 @@ footer strong {
 }
 .bottom-content p {
   line-height: 1;
+}
+@media ( max-width: 500px) {
+  footer p {
+    text-align: center;
+    padding: 0.5%;
+  }
 }
 .main-content {
   background: beige;
@@ -257,6 +284,14 @@ footer strong {
 .posts .images {
   max-width: 100%;
   border-radius: 5px;
+}
+@media ( max-width: 500px) {
+  .first-post {
+    width: 92.5%;
+  }
+  .first-post p {
+    font-size: 1.15rem;
+  }
 }
 .creator-container {
   display: flex;

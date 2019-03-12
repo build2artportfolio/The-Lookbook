@@ -63,14 +63,4 @@ div.addEventListener('click', function(){
     document.documentElement.scrollTop = 0;
 });
 
-//Prevent Default
-// Cancels out the refresh on the anchors
-// *********NEEDS TO BE REWRITEN OR BREAKS HOME/ABOUT/LOGIN***********Or just removed entirely.
-// const noRefresh = document.querySelectorAll('a');
-// for(i = 0; i < noRefresh.length; i++){
-//     noRefresh[i].addEventListener('click', function(e){
-//         e.preventDefault();
-//     });
-// };
-
 // Other JavaScript Elements Here
