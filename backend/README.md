@@ -183,3 +183,68 @@ _JWT Token Required in `authorization` header_
     message: "Post deleted."
 }
 ```
+
+## User Endpoints
+
+### GET /api/users/:id
+
+- Returns an object with the user's information and posts.
+
+- Response Example:
+
+`Shortened posts array in response to save page space.`
+
+```
+{
+    "id": 1,
+    "username": "Bob",
+    "about": "I like photography."
+    "posts": [
+        {
+            "id": 1,
+            "title": "iusto ab assumenda",
+            "description": "Delectus soluta quia facilis ut deserunt autem.",
+            "imageUrl": "http://lorempixel.com/640/480",
+            "artistId": 1,
+            "created_at": "2019-03-12T00:31:35.608Z",
+            "updated_at": "2019-03-12T00:31:35.608Z"
+        },
+```
+
+### PUT /api/users/:id
+
+_JWT Token Required in `authorization` header_
+
+- Returns an object with the user's updated information and posts.
+- If you are changing user's password, the currentPassword property is required. Otherwise, it can be omitted.
+
+- Request Example:
+
+```
+{
+    "about": "I like photography A LOT.",
+    "password": "NewPassword",
+    "currentPassword": "OldPass"
+}
+```
+
+- Response Example:
+
+`Shortened posts array in response to save page space.`
+
+```
+{
+    "id": 1,
+    "username": "Bob",
+    "about": "I like photography A LOT."
+    "posts": [
+        {
+            "id": 1,
+            "title": "iusto ab assumenda",
+            "description": "Delectus soluta quia facilis ut deserunt autem.",
+            "imageUrl": "http://lorempixel.com/640/480",
+            "artistId": 1,
+            "created_at": "2019-03-12T00:31:35.608Z",
+            "updated_at": "2019-03-12T00:31:35.608Z"
+        },
+```
