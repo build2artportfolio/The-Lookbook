@@ -217,7 +217,7 @@ describe("Users Routes", () => {
 			const res = await request(server)
 				.delete(`/api/users/${user.id}`)
 				.set("authorization", token);
-			expect(res.status).toBe(201);
+			expect(res.status).toBe(200);
 			expect(res.body.message).toBe("Account deleted.");
 		});
 	});

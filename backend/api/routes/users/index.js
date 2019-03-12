@@ -82,4 +82,28 @@ router.put("/:id", authenticate, async (req, res) => {
 	}
 });
 
+router.delete("/:id", authenticate, async (req, res) => {
+	try {
+		const foundUser = await Users.getOne({ id: req.params.id });
+		if (!foundUser)
+			return res.status(404).json({ message: "No user found with that ID." });
+		if (foundUser.id !== req.user.id)
+			return res
+				.status(403)
+				.json({ message: "You do not have permission to do this." });
+		const deleted = await Users.del(req.params.id);
+		if (deleted) {
+			return res.status(200).json({ message: "Account deleted." });
+		} else {
+			return res
+				.status(500)
+				.json({
+					message: "Something went wrong with the deletion of the account."
+				});
+		}
+	} catch (error) {
+		return res.status(500).json({ message: "Internal error." });
+	}
+});
+
 module.exports = router;
