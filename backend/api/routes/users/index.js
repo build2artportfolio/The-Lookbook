@@ -19,16 +19,19 @@ router.get("/:id", async (req, res) => {
 
 router.put("/:id", authenticate, async (req, res) => {
 	const { username, password, about, currentPassword } = req.body;
+	//User must provide something to change.
 	if (!username && !password && !about)
 		return res.status(422).json({
 			message: "You must provide changes."
 		});
+	//User must provide current password, to change their password.
 	if (password && !currentPassword)
 		return res.status(422).json({
 			message:
 				"You must provide your current password if you want to change it to something else."
 		});
 
+	//Construct new properties that are for updating the user.
 	let newProps = {};
 	if (username) {
 		newProps.username = username;
@@ -36,31 +39,45 @@ router.put("/:id", authenticate, async (req, res) => {
 	if (about) {
 		newProps.about = about;
 	}
-	if (password) {
-		newProps.password = bcrypt.hashSync(password, 12);
-	}
 
 	try {
 		const findUser = await Users.getOne({ id: req.params.id });
+		if (!findUser)
+			return res.status(404).json({ message: "No user found with that ID." });
+		//Check if the user is trying to update a user that isn't them.
 		if (req.user.id !== findUser.id) {
 			return res
 				.status(403)
 				.json({ message: "You do not have permission to modify this user." });
 		}
-		if (password && bcrypt.compareSync(password, findUser.password)) {
-			const updatedUser = await Users.update(req.params.id, newProps);
-			delete updatedUser.password;
-			return res.status(201).json(updatedUser);
+		//If user provided password, check if their currentPass that they passed in matches their actual current password.
+		if (password) {
+			const passMatches = await bcrypt.compare(
+				currentPassword,
+				findUser.password
+			);
+			if (!passMatches) {
+				return res
+					.status(400)
+					.json({ message: "Incorrect password. Can not modify user." });
+			} else {
+				//Create a new hash for their new password, then add it to the new properties to update the user with.
+				newProps.password = await bcrypt.hash(password, 12);
+				const updatedUser = await Users.update(req.params.id, newProps);
+				delete updatedUser.password; //Don't return the hashed password to the user.
+				return res.status(201).json(updatedUser);
+			}
+			//If the user didn't provide a password, just update the user.
 		} else if (!password) {
 			const updatedUser = await Users.update(req.params.id, newProps);
 			delete updatedUser.password;
 			return res.status(201).json(updatedUser);
-		} else {
-			return res
-				.status(400)
-				.json({ message: "Incorrect password. Can not modify user." });
 		}
 	} catch (error) {
+		if (error.code === "23505") {
+			//PostgreSQL Unique Constraint error. We know this is for the username, as it's the only unique column other than Id (Which they can't update)
+			return res.status(400).json({ message: "Username is already taken." });
+		}
 		return res.status(500).json({ message: "Internal error." });
 	}
 });
