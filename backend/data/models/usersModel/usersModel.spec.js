@@ -81,4 +81,23 @@ describe("Users Model Functions", () => {
 			expect(updatedUser).toBe(null);
 		});
 	});
+
+	describe("del()", () => {
+		it("should return true if delete worked", async () => {
+			//Create user.
+			const user = await Users.create({
+				username: "Michael",
+				password: "test"
+			});
+			//Delete user
+			const deleted = await Users.del(user.id);
+			expect(deleted).toBe(true);
+		});
+
+		it("should return null if no record was deleted", async () => {
+			//User ID incrementation begins at 1, so we know nothing exists with the ID of 0.
+			const deleted = await Users.del(0);
+			expect(deleted).toBe(null);
+		});
+	});
 });
