@@ -282,7 +282,7 @@ footer strong {
   border-radius: 10px;
 }
 .posts .images {
-  max-width: 100%;
+  width: 100%;
   border-radius: 5px;
 }
 @media ( max-width: 500px) {
