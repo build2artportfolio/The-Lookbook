@@ -1,5 +1,18 @@
 const router = require("express").Router();
-const Posts = require("../../../data/models/postsModel");
+const Users = require("../../../data/models/usersModel");
 const authenticate = require("../../middleware/auth").authenticate;
+
+router.get("/:id", async (req, res) => {
+	try {
+		const user = await Users.getOne({ id: req.params.id });
+		if (!user)
+			return res
+				.status(404)
+				.json({ message: "Can not find a user with that ID." });
+		return res.status(200).json(user);
+	} catch (error) {
+		res.status(500).json({ message: "Internal error." });
+	}
+});
 
 module.exports = router;
