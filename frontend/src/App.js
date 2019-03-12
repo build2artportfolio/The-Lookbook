@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import Login from './components/Login';
+import SignUp from './components/Signup';
 import PrivateRoute from './components/PrivateRoute';
-import Protected from './components/Protected';
+import UserDashboard from './components/UserDashboard';
 
 class App extends Component {
   render() {
@@ -11,11 +12,11 @@ class App extends Component {
       <Router>
         <div className="App">
           <div className="Navbar">
-            <Link to="/public">Public Page for Viewers</Link>
             <Link to="/protected">Login or Register</Link>
           </div>
           <Route path="/login" component={Login} />
-          <PrivateRoute path="/protected" component={Protected} />
+          <Route path="/login" component={SignUp} />
+          <PrivateRoute path="/protected" component={UserDashboard} />
         </div>
       </Router>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 
-class Protected extends React.Component {
+class UserDashboard extends React.Component {
     render() {
         return (
             <div>
@@ -10,4 +10,4 @@ class Protected extends React.Component {
     }
 }
 
-export default Protected;
+export default UserDashboard;
