@@ -112,9 +112,11 @@ _JWT Token Required in `authorization` header_
 - Request Example (Logged in as `Bob`):
 
 ```
+{
     title: "in unde debitis",
     description: "Atque soluta doloribus explicabo impedit.",
-    image: "http://lorempixel.com/640/480",
+    image: "http://lorempixel.com/640/480"
+}
 ```
 
 - Response Example:
@@ -144,8 +146,10 @@ _JWT Token Required in `authorization` header_
 - Request Example (Logged in as `Bob`):
 
 ```
+{
     title: "in unde debitis",
     description: "Atque soluta doloribus explicabo impedit."
+}
 ```
 
 - Response Example:
