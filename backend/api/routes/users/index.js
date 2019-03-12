@@ -9,6 +9,7 @@ router.get("/:id", async (req, res) => {
 			return res
 				.status(404)
 				.json({ message: "Can not find a user with that ID." });
+		delete user.password; //Don't send back the hashed password...
 		return res.status(200).json(user);
 	} catch (error) {
 		res.status(500).json({ message: "Internal error." });
