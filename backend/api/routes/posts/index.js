@@ -1,6 +1,13 @@
 const router = require("express").Router();
 const Posts = require("../../../data/models/postsModel");
 const authenticate = require("../../middleware/auth").authenticate;
+const cloudinary = require('cloudinary');
+
+cloudinary.config({
+	cloud_name: process.env.CLOUD_NAME,
+	api_key: process.env.CLOUD_KEY,
+	api_secret: process.env.CLOUD_SECRET
+});
 
 router.get("/", async (req, res) => {
 	let { pagesize, page } = req.headers;
@@ -47,6 +54,15 @@ router.post("/", authenticate, async (req, res) => {
 		};
 		const createdPost = await Posts.create(newPost);
 		return res.status(201).json(createdPost);
+	} catch (error) {
+		return res.status(500).json({ message: "Internal error." });
+	}
+});
+
+//Testing cloudinary file upload API
+router.post("/upload", authenticate, async (req, res) => {
+	try {
+		
 	} catch (error) {
 		return res.status(500).json({ message: "Internal error." });
 	}
