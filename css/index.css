@@ -71,6 +71,9 @@
 .color-gradient3 {
   background-image: linear-gradient(to left, #effafd, #e6e1e1);
 }
+.color-gradient5 {
+  background-image: linear-gradient(to right, #effafd, #e6e1e1);
+}
 .color-gradient4 {
   background-image: linear-gradient(to bottom right, #effafd, lightgrey);
 }
@@ -261,6 +264,7 @@ footer {
   align-items: center;
   background-image: linear-gradient(#effafd, lightgrey);
   font-size: 1.25rem;
+  margin-top: 3%;
 }
 footer a {
   text-decoration: none;
@@ -348,6 +352,20 @@ footer strong {
   text-align: center;
 }
 .first-post p {
+  line-height: 1.5;
+  font-size: 1.5rem;
+}
+.last-post {
+  display: flex;
+  width: 95%;
+  background-image: linear-gradient(to right, #effafd, #e6e1e1);
+  border: 2px solid black;
+  border-radius: 10px;
+  font-size: 1.15rem;
+  margin: auto;
+  margin-bottom: 1%;
+}
+.last-post p {
   line-height: 1.5;
   font-size: 1.5rem;
 }
@@ -489,7 +507,6 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background-color: lightgray;
 }
 .container {
   width: 100%;
