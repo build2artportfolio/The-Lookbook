@@ -1,28 +1,41 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {  } from '../actions';
-import {  } from 'reactstrap';
+import { getUserPosts } from '../actions';
+import { } from 'reactstrap';
 import Post from './Post';
+import CreateForm from './CreateForm';
 
 class UserDashboard extends React.Component {
     state = {
     };
+
+    componentDidMount() {
+        if (localStorage.getItem('token') && !this.props.currentUser) {
+            this.props.getUserPosts(localStorage.getItem('currentUserID'));
+        }
+    }
+
     render() {
         return (
-            <div className='card_container'>
-                {this.props.posts.map(post => (
-                    <Post post={post}></Post>
-                ))}
+            <div>
+                <CreateForm />
+                <div className='card_container'>
+                    {this.props.posts.map(post => (
+                        <Post key={post.id} post={post}></Post>
+                    ))}
+                </div>
             </div>
+
         );
     }
 }
 
 const mapStateToProps = state => ({
-    posts: state.currentUserPosts
-  });
-  
+    posts: state.currentUserPosts,
+    currentUser: state.currentUser
+});
+
 export default connect(
     mapStateToProps,
-    { }
-  )(UserDashboard);
+    { getUserPosts }
+)(UserDashboard);

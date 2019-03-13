@@ -5,11 +5,12 @@ import {
   SIGNUP_START,
   SIGNUP_SUCCESS,
   SIGNUP_ERROR,
-  GET_USER_POSTS_SUCCESS
+  GET_USER_POSTS_SUCCESS,
+  CREATE_POST_SUCCESS
 } from "../actions";
 
 const initialState = {
-  currentUser: {},
+  currentUser: null,
   currentUserPosts: []
 };
 
@@ -47,6 +48,10 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         currentUserPosts: action.payload
+      };
+    case CREATE_POST_SUCCESS:
+      return {
+        ...state,
       };
     default:
       return state;

@@ -11,6 +11,10 @@
   margin: 0 auto;
   width: 400px;
 }
+.CreateForm {
+  margin: 0 auto;
+  width: 400px;
+}
 
 .card_container {
   display: flex;
