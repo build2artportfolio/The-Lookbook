@@ -11,4 +11,18 @@
   margin: 0 auto;
   width: 400px;
 }
+.CreateForm {
+  margin: 0 auto;
+  width: 400px;
+}
 
+.card_container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly
+}
+
+.card {
+  margin: 0.5rem;
+  width: 27%;
+}

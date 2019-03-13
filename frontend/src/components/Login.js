@@ -6,7 +6,7 @@ import { Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
 class Login extends React.Component {
   state = {
     credentials: {
-      username: 'David',
+      username: 'Bob',
       password: 'password'
     }
   };
@@ -19,6 +19,7 @@ class Login extends React.Component {
       }
     });
   };
+  
   login = e => {
     e.preventDefault();
     this.props.login(this.state.credentials).then(() => {
