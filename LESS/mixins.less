@@ -18,8 +18,9 @@
 
   &:hover {
     color: @bg-color;
-    background-color: @font-color;
+    .color-gradient6();
   }
+
 }
 
 
@@ -90,6 +91,10 @@
 
 .color-gradient4 {
   background-image:linear-gradient(to bottom right, rgb(239, 250, 253), lightgrey)
+}
+
+.color-gradient6 {
+  background-image:linear-gradient(to left, rgb(239, 250, 253),beige)
 }
 
 // Dont have to use this, made a disco ball mixin for preprocessing week and I am a big fan.
