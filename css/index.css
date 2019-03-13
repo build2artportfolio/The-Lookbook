@@ -60,6 +60,9 @@
 .color-gradient4 {
   background-image: linear-gradient(to bottom right, #effafd, lightgrey);
 }
+.color-gradient6 {
+  background-image: linear-gradient(to left, #effafd, beige);
+}
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -359,6 +362,12 @@ footer strong {
   line-height: 1.5;
   font-size: 1.5rem;
 }
+@media ( max-width: 500px) {
+  .last-post p {
+    margin: 3%;
+    font-size: 1.25rem;
+  }
+}
 .posts {
   display: flex;
   width: 25%;
@@ -451,7 +460,7 @@ footer strong {
     width: 92.5%;
   }
   .first-post p {
-    font-size: 1.15rem;
+    font-size: 1.25rem;
   }
 }
 @media ( max-width: 500px) {
@@ -521,7 +530,6 @@ body {
   }
 }
 .btn {
-  color: black;
   background-color: lightgrey;
   margin: auto;
   cursor: pointer;
@@ -536,11 +544,18 @@ body {
   margin-bottom: 1%;
   display: flex;
   justify-content: center;
+  color: black;
 }
 .btn:hover {
   color: lightgrey;
-  background-color: black;
+  background-image: linear-gradient(to left, #effafd, beige);
 }
 .btn-anchor {
   text-decoration: none;
+}
+@media ( max-width: 500px) {
+  .btn {
+    width: 70%;
+    margin-bottom: 3%;
+  }
 }
