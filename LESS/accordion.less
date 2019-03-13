@@ -10,33 +10,43 @@
         display: flex;
 
         .accordion-title {
-            background-color: purple;
+            background-color: lightgray;
             color:black;
             font-size: 1rem;
             font-weight: bold;
             padding: 7.5px;
-            // margin: 2.5px;
+            margin: 5px;
         }
 
         .tab {
             align-items: center;
-            background-color: pink;
-            color: blue;
+            background-color:rgb(239, 250, 253);
+            color: black;
             font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             padding: 7.5px;
-            border: 1px solid black;
-            // margin: 2.5px;
+            border: 2px solid black;
+            margin: 5px;
             // &:hover{
 
             // }
         }
 
         .active-tab {
-            background-color: magenta;
-            color: blue;
-            border: 3px solid yellow;
+            background-color: white;
+            color: red;
+            border: 2px solid purple;
         }
     }
 }
+
+// Mobile Responsiveness
+@media @mobile {
+    .accordion .accordion-categories .accordion-title{
+        display: none;
+        
+    }   
+}
+
+    
