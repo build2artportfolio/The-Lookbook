@@ -6,13 +6,9 @@ import Post from './Post';
 import CreateForm from './CreateForm';
 
 class UserDashboard extends React.Component {
-    state = {
-    };
 
     componentDidMount() {
-        if (localStorage.getItem('token') && !this.props.currentUser) {
             this.props.getUserPosts(localStorage.getItem('currentUserID'));
-        }
     }
 
     render() {

@@ -1,6 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, Button } from 'reactstrap';
+import { setEditForm } from '../actions';
 
 class Post extends React.Component {
     render() {
@@ -10,11 +12,17 @@ class Post extends React.Component {
                 <CardBody>
                     <CardTitle>{this.props.post.title}</CardTitle>
                     <CardText>{this.props.post.description}</CardText>
-                    <Button>Edit</Button>
+                    <Button onClick={e => this.props.setEditForm(this.props.post)}>Edit</Button>
                 </CardBody>
             </Card>
         );
     }
 }
 
-export default Post;
+const mapStateToProps = state => ({
+});
+
+export default connect(
+  mapStateToProps,
+  { setEditForm }
+)(Post);
