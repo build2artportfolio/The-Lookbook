@@ -224,6 +224,37 @@ footer strong {
     padding: 0.5%;
   }
 }
+.accordion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 2px solid black;
+  background-color: lightgray;
+  width: 100%;
+}
+.accordion .accordion-categories {
+  display: flex;
+}
+.accordion .accordion-categories .accordion-title {
+  background-color: purple;
+  color: black;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.accordion .accordion-categories .tab {
+  align-items: center;
+  background-color: pink;
+  color: blue;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  flex-direction: row;
+}
+.accordion .accordion-categories .active-post {
+  background-color: magenta;
+  color: blue;
+  border: 3px solid yellow;
+}
 .main-content {
   background: beige;
   padding-top: 1%;

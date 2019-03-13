@@ -80,4 +80,50 @@ if(x.matches){
 
 }
 
-// Other JavaScript Elements Here
+// Accordion JS elements----------------->
+
+class PostPanel {
+    constructor (postVariable) {
+        this.postVariable = postVariable;
+        this.postData = this.postVariable.dataset.post
+
+        if(this.postData === "all") {
+            this.allPosts = document.querySelectorAll(".posts");
+
+        } else {
+            this.allPosts = document.querySelectorAll(`.posts[data-post='${this.postData}']`);
+        }
+
+        this.allPosts = Array.from(this.allPosts).map( event => new PostContent(this.allPosts));
+        this.postVariable.addEventListener("click", () => this.specifyTab());
+    } 
+
+    specifyTab() {
+        const myTabs = document.querySelectorAll(".tab");
+        myTabs.forEach(tabClass => tabClass.classList.remove("active-tab"));
+
+        const myPosts = document.querySelectorAll('.posts');
+        myPosts.forEach(allCards => allCards.style.display = "none");
+
+        this.postVariable.classList.add('active-tab');
+        this.myPosts.forEach(posts => posts.specifyPosts());
+    }
+}
+
+
+class PostContent {
+    constructor(content) {
+        this.content = content;
+    }
+
+    specifyPosts() {
+        this.content.forEach( posts => posts.style.display = 'flex');
+    }
+}
+
+
+let allTab = document.querySelectorAll('.tab')
+
+allTab.forEach(function(event){
+    return new PostPanel(event);
+});

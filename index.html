@@ -26,6 +26,18 @@
             </div>
         </header>
 
+        <div class = "accordion">
+            <div class = "accordion-categories">
+                <h4 class = "accordion-title">Content Categories</h4>
+                <div data-post = "all" class = "tab active-tab">All</div>
+                <!-- <div data-post = "information" class = "tab">Information</div> -->
+                <div data-post = "food" class = "tab">Food</div>
+                <div data-post = "landscape" class = "tab">Landscape</div>
+                <div data-post = "portrait" class = "tab">Portrait</div>
+                <div data-post = "wildlife" class = "tab">Wildlife</div>
+            </div>
+        </div>
+
         <div class = "container">
             <section class = "main-content">
                 <div class = "first-post">
@@ -47,7 +59,7 @@
                     </div>
 
                 <div class = "category-container">
-                    <div class = "posts">
+                    <div class = "posts" data-post = "food">
                         <div class = "food">
                             <h2>Foam Bear-Art Beverage</h2>
                             <!-- <p>Insert Photo Description Here!(if we want to include descriptions).</p> -->
@@ -57,7 +69,7 @@
                     </div>
 
                     <div class = "posts">
-                        <div class = "food">
+                        <div class = "food" data-post = "food">
                             <h2>Strawberries and Cream Parfait</h2>
                             <!-- <p>Insert Photo Description Here!(if we want to include descriptions).</p> -->
                             <img src = "images/food/Strawberries-and-Cream.jpg" class = "images" alt = "Strawberries and Cream Parfait"></a>
@@ -66,7 +78,7 @@
                     </div>
 
                     <div class = "posts">
-                        <div class = "food">
+                        <div class = "food" data-post = "food">
                             <h2>Citrus Close-Up</h2>
                             <!-- <p>Insert Photo Description Here!(if we want to include descriptions).</p> -->
                             <img src = "images/food/Citrus-Close-Up.jpg" class = "images" alt = "Close up of sliced oranges"></a>
@@ -77,7 +89,7 @@
 
                     <div class = "category-container">
                         <div class = "posts">
-                            <div class = "landscape">
+                            <div class = "landscape" data-post = "landscape">
                                 <h2>Arch-Bridge</h2>
                                 <!-- <p>Insert Photo Description Here!(if we want to include descriptions).</p> -->
                                 <img src = "images/landscape/Arch-Bridge.jpg" class = "images" alt = "Arch Bridge Landscape"></a>
@@ -86,7 +98,7 @@
                         </div>
 
                         <div class = "posts">
-                                <div class = "landscape">
+                                <div class = "landscape" data-post = "landscape">
                                     <h2>Waterfall</h2>
                                     <!-- <p>Insert Photo Description Here!(if we want to include descriptions).</p> -->
                                     <img src = "images/landscape/Waterfall-Clouds.jpg" class = "images" alt = "Waterfall Landscape"></a>
@@ -95,7 +107,7 @@
                             </div>
 
                         <div class = "posts">
-                            <div class = "landscape">
+                            <div class = "landscape" data-post = "landscape">
                                 <h2>Purple Sunset</h2>
                                 <!-- <p>Insert Photo Description Here!(if we want to include descriptions).</p> -->
                                 <img src = "images/landscape/Dawn-Sunrise.jpg" class = "images" alt = "Incredible Sunset Landscape"></a>
@@ -106,7 +118,7 @@
 
                     <div class = "category-container">
                         <div class = "posts">
-                            <div class = "portrait">
+                            <div class = "portrait" data-post = "portrait">
                                 <h2>Black-and-White</h2>
                                 <!-- <p>Insert Photo Description Here!(if we want to include descriptions).</p> -->
                                 <img src = "images/portrait/Black-White-portrait.jpg" class = "images" alt = "Black and White Portrait"></a>
@@ -115,7 +127,7 @@
                         </div>
 
                         <div class = "posts">
-                            <div class = "portrait">
+                            <div class = "portrait" data-post = "portrait">
                                 <h2>Bearded-Male Portrait</h2>
                                 <!-- <p>Insert Photo Description Here!(if we want to include descriptions).</p> -->
                                 <img src = "images/portrait/Bearded-Male-portrait.jpg" class = "images" alt = "Bearded-Male Portrait"></a>
@@ -124,7 +136,7 @@
                         </div>    
 
                         <div class = "posts">
-                            <div class = "portrait">
+                            <div class = "portrait" data-post = "portrait">
                                 <h2>Female Close-Up</h2>
                                 <!-- <p>Insert Photo Description Here!(if we want to include descriptions).</p> -->
                                 <img src = "images/portrait/Female-portrait.jpg" class = "images" alt = "Close-up Female Portrait"></a>
@@ -135,7 +147,7 @@
                        
                     <div class = "category-container">
                         <div class = "posts">
-                            <div class = "wildlife">
+                            <div class = "wildlife" data-post = "wildlife">
                                 <h2>Peaceful Bear</h2>
                                 <!-- <p>Insert Photo Description Here!(if we want to include descriptions).</p> -->
                                 <img src = "images/wildlife/Bear-img.jpg" class = "images" alt = "Bear resting on a log"></a>
@@ -144,7 +156,7 @@
                         </div>
 
                         <div class = "posts">
-                            <div class = "wildlife">
+                            <div class = "wildlife" data-post = "wildlife">
                                 <h2>Sea Turtle Underwater</h2>
                                 <!-- <p>Insert Photo Description Here!(if we want to include descriptions).</p> -->
                                 <img src = "images/wildlife/Turtle-img.jpg" class = "images" alt = "Underwater shot of a sea-turtle"></a>
@@ -153,7 +165,7 @@
                         </div>
 
                         <div class = "posts">
-                            <div class = "wildlife">
+                            <div class = "wildlife" data-post = "wildlife">
                                 <h2>Elephant in Daylight</h2>
                                 <!-- <p>Insert Photo Description Here!(if we want to include descriptions).</p> -->
                                 <img src = "images/wildlife/Elephant-img.jpg" class = "images" alt = "An incredible shot of an elephant"></a>
