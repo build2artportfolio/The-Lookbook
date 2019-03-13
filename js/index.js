@@ -11,11 +11,11 @@ for (let i = 0; i < aTag.length; i++) {
 
 //Click Event
 // Prompts an alert saying Redirecting when a navigation is clicked.
-let navPro = document.querySelector("nav");
+// let navPro = document.querySelector("nav");
 
-navPro.addEventListener("click", function() {
-  alert("Redirecting");
-});
+// navPro.addEventListener("click", function() {
+//   alert("Redirecting");
+// });
 
 // Click Event Listener
 // Changes any Ptag section's text to bold.
