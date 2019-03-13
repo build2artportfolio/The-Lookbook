@@ -1,0 +1,14 @@
+.App .Navbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10px;
+}
+.LoginForm {
+  margin: 0 auto;
+  width: 400px;
+}
+.SignupForm {
+  margin: 0 auto;
+  width: 400px;
+}
+

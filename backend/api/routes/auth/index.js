@@ -23,7 +23,8 @@ router.post("/login", async (req, res) => {
 			//Create payload. The payload is the logged in user's information.
 			const payload = {
 				id: foundUser.id,
-				username: foundUser.username
+				username: foundUser.username,
+				about: foundUser.about
 			};
 
 			const options = {
@@ -38,7 +39,6 @@ router.post("/login", async (req, res) => {
 			return res.status(400).json({ message: "Incorrect login credentials." });
 		}
 	} catch (error) {
-		console.log(error);
 		return res.status(500).json({ message: "Internal error." });
 	}
 });
