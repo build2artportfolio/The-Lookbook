@@ -137,6 +137,44 @@ _JWT Token Required in `authorization` header_
 }
 ```
 
+### POST /api/posts/upload
+
+This is the alternative to `POST /api/posts` where instead of a url to be sent, an actual image can be uploaded.
+
+_JWT Token Required in `authorization` header_
+
+- Creates an Artist Post as the User you are logged in as.
+- Request Example (Logged in as `Bob`):
+- Requires FormData to be sent.
+- Requires `content-type` header to be set to `multipart/form-data`
+- Requires a `title` text field, and an `image` file field to be sent for post creation.
+- Image uploaded must be a JPEG or PNG file.
+
+```
+{
+    title: "in unde debitis",
+    image: `FILE`
+}
+```
+
+- Response Example:
+
+```
+{
+    "id": 6,
+    "title": "in unde debitis",
+    "description": "Atque soluta doloribus explicabo impedit.",
+    "imageUrl": "http://res.cloudinary.com/ls-artportfolio/image/upload/v1552497115/crjerk7pgdivlf2rqwij.jpg",
+    "artistId": 1,
+    "created_at": "2019-03-11T20:28:52.368Z",
+    "updated_at": "2019-03-11T20:28:52.368Z",
+    "artist": {
+        "id": 1,
+        "username": "Bob"
+    }
+}
+```
+
 ### PUT /api/posts/:id
 
 _JWT Token Required in `authorization` header_
