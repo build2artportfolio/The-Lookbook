@@ -1,0 +1,40 @@
+// Footer content, contains a small thank you blurb, copyright and the github/email tags.
+
+footer {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border-top: 2px solid black;
+    padding-top: 15px;
+    width: 100%;
+    align-items: center;
+    background-color: lightgrey;
+    font-size: 1.25rem;
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    strong {
+        font-weight: bold;
+    }
+}
+
+.bottom-content {
+    line-height: 1.7;
+
+    p {
+        line-height: 1;
+    }
+
+}
+
+// Mobile Responsiveness Styling
+
+@media @mobile {
+    footer p {
+        text-align: center;
+        padding: .5%;
+    }
+}
