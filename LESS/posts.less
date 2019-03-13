@@ -16,7 +16,8 @@
 .first-post {
   display: flex;
   width: 95%;
-  background-color: rgb(239, 250, 253);
+  // background-color: rgb(239, 250, 253);
+  .color-gradient3();
   border: 2px solid black;
   border-radius: 10px;
   font-size: 1.15rem;
@@ -42,13 +43,14 @@
 
 .posts {
   display: flex;
-  width: 32%;
+  width: 25%;
   background-color: white;
   border: 2px solid black;
   border-radius: 10px;
   font-size: 1.15rem;
-  margin-bottom: 1%;
+  margin: 1% 0 2%;
   text-align: center;
+  justify-content: center;
 
   h2 {
     font-size: 1.25rem;
@@ -69,11 +71,26 @@
   }
 
   .images {
-    //max-width: 100%;
-    width: 100%;
-    // height:75%;
+    max-width: 100%;
     border-radius: 5px;
+    padding: 1% 5%;
   }
+
+  .food {
+    .fadein1();
+  }
+
+  .landscape {
+    .fadein1();
+  }
+
+  .portrait {
+    .fadein1();
+  }
+
+  .wildlife {
+    .fadein1();
+  }  
 }
 
 @media @mobile {

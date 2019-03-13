@@ -2,19 +2,21 @@
 // The first "card/post" is the quick title into introduction section, can always shift that around.
 
 .top-content {
+    .color-gradient();
     display: flex;
     justify-content: center;
     border-bottom: 2px solid black;
     padding: 15px 0;
     width: 100%;
     align-items: center;
-    background-color: lightgrey;
+    // background-color: lightgrey;
+    
 
     .navigation {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        width: 85%;
+        width: 65%;
         font-size: 2rem;
     }
 
@@ -41,10 +43,11 @@
         width: 100%;
     }
 
-    .navigation {
+    .top-content .navigation {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        flex-wrap: wrap;
         flex-direction: column;
         width: 100%;
     }
