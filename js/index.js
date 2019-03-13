@@ -9,12 +9,23 @@ for(let i = 0; i < aTag.length; i++){
     });
 };
 
-//Event 
+//Click Event
+// Prompts an alert saying Redirecting when a navigation is clicked. 
 let navPro = document.querySelector('nav');
 
 navPro.addEventListener('click', function(){
     alert("Redirecting");
 });
+
+// Click Event Listener
+// Changes any Ptag section's text to bold.
+const allPs = document.querySelectorAll('p');
+
+for(let i = 0; i < allPs.length; i++){
+    allPs[i].addEventListener('click', function(){
+        allPs[i].style.fontWeight = "bold";
+    });
+}
 
 // DblClick Event Listener
 // Image Nullifier, removes images on dbl click. 
@@ -66,7 +77,7 @@ if(x.matches){
         document.body.scrollTop = 0;
         document.documentElement.scrollTop = 0;
     });
-}
 
+}
 
 // Other JavaScript Elements Here

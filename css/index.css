@@ -282,7 +282,7 @@ footer strong {
   border-radius: 10px;
 }
 .posts .images {
-  width: 100%;
+  max-width: 100%;
   border-radius: 5px;
 }
 @media ( max-width: 500px) {
@@ -350,4 +350,9 @@ body {
 }
 .container {
   width: 100%;
+}
+@media ( max-width: 500px) {
+  .boxie {
+    display: none;
+  }
 }
