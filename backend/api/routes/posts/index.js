@@ -1,6 +1,11 @@
 const router = require("express").Router();
 const Posts = require("../../../data/models/postsModel");
 const authenticate = require("../../middleware/auth").authenticate;
+const cloudinary = require("cloudinary");
+const multer = require("multer");
+const Datauri = require("datauri");
+const datauri = new Datauri();
+const upload = multer();
 
 router.get("/", async (req, res) => {
 	let { pagesize, page } = req.headers;
@@ -51,6 +56,50 @@ router.post("/", authenticate, async (req, res) => {
 		return res.status(500).json({ message: "Internal error." });
 	}
 });
+
+//File upload version of post creation.
+//upload.single middleware sets image file upload as a single 'image'
+router.post(
+	"/upload",
+	authenticate,
+	upload.single("image"),
+	async (req, res) => {
+		const { title, description } = req.body;
+		if (!title || !req.file) {
+			return res.status(422).json({
+				message: "You must provide a title and image to create a post."
+			});
+		}
+
+		//Only allow jpg and png images.
+		if (
+			req.file.mimetype !== "image/jpeg" &&
+			req.file.mimetype !== "image/png"
+		) {
+			return res.status(400).json({ message: "File must be a jpg or png." });
+		}
+
+		try {
+			//Convert req.file.buffer from multer into a usable upload to cloudinary.
+			datauri.format(req.file.mimetype, req.file.buffer);
+			//upload datauri.content to cloudinary (Which is the image)
+			const imageUpload = await cloudinary.uploader.upload(datauri.content);
+			//Create new post body
+			const newPost = {
+				title,
+				description,
+				imageUrl: imageUpload.url,
+				artistId: req.user.id
+			};
+			//Create post
+			const createdPost = await Posts.create(newPost);
+			//Send created post to the user
+			return res.status(201).json(createdPost);
+		} catch (error) {
+			return res.status(500).json({ message: "Internal error." });
+		}
+	}
+);
 
 router.put("/:id", authenticate, async (req, res) => {
 	const { title, description, image } = req.body;
