@@ -4,7 +4,7 @@
     .my-button();
     // .glow();
 }
-// colors are just arbitrary soft colors atm. Open to change.
+
 .my-button(@bg-color: lightgrey, @font-color: black) {
   color: @font-color;
   background-color: @bg-color;
@@ -30,15 +30,86 @@
   width: 100%;
 }
 
-// Dont have to use this, made a disco ball mixin for preprocessing week and I am a big fan.
-// took out the strobe half of it and just left the glow so its less obnoxious but still cool.
-// .glow () {
-//     animation: glow 500ms infinite;
 
-//     @keyframes glow {
-//     0% { box-shadow: 0 0 -10px red; }
-//     40% { box-shadow: 0 0 20px blue; }
-//     60% { box-shadow: 0 0 20px purple; }
-//     100% { box-shadow: 0 0 -10px aqua; }
-//   }
-// }
+// Fadeins
+.fadein1 {
+  animation: fadein 3s;
+
+  @keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+}
+
+.fadein2 {
+  animation: fadein 4s;
+
+  @keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+}
+
+.fadein3 {
+  animation: fadein 6s;
+
+  @keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+}
+
+.fadein4 {
+  animation: fadein 8s;
+
+  @keyframes fadein {
+    from {opacity: 0;}
+    to {opacity: 1;}
+  }
+}
+
+// Color Gradient
+.color-gradient {
+  background-image:linear-gradient(
+    lightgrey, rgb(239, 250, 253)
+  )
+}
+
+.color-gradient2 {
+  background-image:linear-gradient(
+    rgb(239, 250, 253), lightgrey
+  )
+}
+
+.color-gradient3 {
+  background-image:linear-gradient(to left, rgb(239, 250, 253), rgb(230, 225, 225))
+}
+
+.color-gradient4 {
+  background-image:linear-gradient(to bottom right, rgb(239, 250, 253), lightgrey)
+}
+
+// Dont have to use this, made a disco ball mixin for preprocessing week and I am a big fan.
+
+.animation-strobe () {
+  animation: disco 500ms infinite;
+
+  @keyframes disco {
+    0% { background: red; box-shadow: 0 0 -10px red; }
+    40% { background: blue; box-shadow: 0 0 20px blue; }
+    60% { background: purple; box-shadow: 0 0 20px purple; }
+    100% { background: aqua; box-shadow: 0 0 -10px aqua; }
+  }
+}
+
+// took out the strobe half of it and just left the glow so its less obnoxious but still cool.
+.glow () {
+    animation: glow 500ms infinite;
+
+    @keyframes glow {
+    0% { box-shadow: 0 0 -10px red; }
+    40% { box-shadow: 0 0 20px blue; }
+    60% { box-shadow: 0 0 20px purple; }
+    100% { box-shadow: 0 0 -10px aqua; }
+  }
+}
