@@ -5,6 +5,7 @@ const Users = require("../../../data/models/usersModel");
 const Posts = require("../../../data/models/postsModel");
 const jwt = require("jsonwebtoken");
 const faker = require("faker");
+
 //After each test, reset the users table.
 afterEach(async () => {
 	await db("posts").del();
@@ -139,6 +140,64 @@ describe("Post Routes", () => {
 			const res = await request(server)
 				.post("/api/posts")
 				.send(newPost)
+				.set("authorization", token);
+			expect(res.status).toBe(201);
+		});
+	});
+
+	//Upload own file version of artist creation
+	describe("POST /upload", () => {
+		it("should return status 401 if no JWT token in headers", async () => {
+			const res = await request(server).post("/api/posts/upload");
+			expect(res.status).toBe(401);
+		});
+
+		it("should return status 422 if no title or image provided", async () => {
+			//Create user. Users model is already tested, so we are just using it to provide a valid Foreign Key to the created posts.
+			const user = await Users.create({
+				username: "Michael",
+				password: "test"
+			});
+			//Now create a JWT for the users authentication, just for testing the API's response.
+			const payload = {
+				id: user.id,
+				username: user.username
+			};
+			const token = await jwt.sign(payload, process.env.JWT_SECRET, {
+				expiresIn: "1d"
+			});
+			//
+			let newPost = {
+				description: faker.lorem.sentence()
+			};
+			const res = await request(server)
+				.post("/api/posts/upload")
+				.send(newPost)
+				.set("authorization", token);
+			expect(res.status).toBe(422);
+		});
+
+		it("should return status 201 and the created post with successful authentication", async () => {
+			//Create user. Users model is already tested, so we are just using it to provide a valid Foreign Key to the created posts.
+			const user = await Users.create({
+				username: "Michael",
+				password: "test"
+			});
+			//Now create a JWT for the users authentication, just for testing the API's response.
+			const payload = {
+				id: user.id,
+				username: user.username
+			};
+			const token = await jwt.sign(payload, process.env.JWT_SECRET, {
+				expiresIn: "1d"
+			});
+			//Set testImagePath for sending to the API.
+			const testImagePath = `${__dirname}/../../../testimage.jpg`;
+			const res = await request(server)
+				.post("/api/posts/upload")
+				.field("title", faker.lorem.words())
+				.field("description", faker.lorem.sentence())
+				.attach("image", testImagePath)
 				.set("authorization", token);
 			expect(res.status).toBe(201);
 		});
