@@ -12,6 +12,8 @@ export const GET_USER_POSTS_SUCCESS = 'GET_USER_POSTS_SUCCESS';
 
 export const CREATE_POST_SUCCESS = 'CREATE_POST_SUCCESS';
 
+export const SET_EDIT = 'SET_EDIT';
+
 export const login = creds => dispatch => {
   dispatch({ type: LOGIN_START });
   return axios.post('https://thelookbook-api.herokuapp.com/api/auth/login', creds)
@@ -63,7 +65,8 @@ export const getUserPosts = id => dispatch => {
 
 export const createPost = info => dispatch => {
   return axios.post('https://thelookbook-api.herokuapp.com/api/posts', info, {
-    headers: { Authorization: localStorage.getItem('token') }})
+    headers: { Authorization: localStorage.getItem('token') }
+  })
     .then(res => {
       dispatch({ type: CREATE_POST_SUCCESS })
     })
@@ -72,5 +75,26 @@ export const createPost = info => dispatch => {
     });
 };
 
+export const setEditForm = (post) => {
+  return (
+    { type: SET_EDIT, payload: post }
+  )
+};
 
+export const editPost = (post, id) => dispatch => {
+  axios
+    .put(`https://thelookbook-api.herokuapp.com/api/posts/${id}`, {
+      title: post.title,
+      description: post.description
+    },
+      {
+        headers: { Authorization: localStorage.getItem('token') }
+      })
+    .then(res => {
+      dispatch({ type: CREATE_POST_SUCCESS })
+    })
+    .catch(err => {
+      console.log(err);
+    })
+};
 
