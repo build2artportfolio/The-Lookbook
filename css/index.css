@@ -445,6 +445,17 @@ footer strong {
     opacity: 1;
   }
 }
+.posts .creators {
+  animation: fadein 3s;
+}
+@keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
 @media ( max-width: 500px) {
   .first-post {
     width: 92.5%;
@@ -507,9 +518,11 @@ html,
 body {
   margin: 0;
   padding: 0;
+  background-color: lightgray;
 }
 .container {
   width: 100%;
+  background-color: beige;
 }
 @media ( max-width: 500px) {
   .boxie {
