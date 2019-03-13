@@ -4,6 +4,8 @@
 
 - `JWT_SECRET` Any string, must be consistent per JWT Token.
 - `DATABASE_URL` PostgreSQL connection string. Provided by Heroku if you have a PostgreSQL addon.
+- `DB_ENV` Can be set to `testing`, `development`, or `production`. Defaults to `development`.
+- `CLOUDINARY_URL` This is the environment variable that cloudinary uses by default. You can get this from your Cloudinary account dashboard.
 
 # Endpoints
 
