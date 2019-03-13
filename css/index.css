@@ -159,7 +159,7 @@ table {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 85%;
+  width: 65%;
   font-size: 2rem;
 }
 .top-content .nav-bar {
