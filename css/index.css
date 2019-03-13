@@ -240,6 +240,7 @@ footer strong {
   color: black;
   font-size: 1rem;
   font-weight: bold;
+  padding: 7.5px;
 }
 .accordion .accordion-categories .tab {
   align-items: center;
@@ -248,9 +249,10 @@ footer strong {
   font-size: 1rem;
   font-weight: bold;
   cursor: pointer;
-  flex-direction: row;
+  padding: 7.5px;
+  border: 1px solid black;
 }
-.accordion .accordion-categories .active-post {
+.accordion .accordion-categories .active-tab {
   background-color: magenta;
   color: blue;
   border: 3px solid yellow;
