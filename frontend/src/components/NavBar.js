@@ -1,25 +1,37 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
+import { logout } from '../actions';
 
 class NavBar extends React.Component {
 
+    logout = e => {
+        e.preventDefault();
+        this.props.logout();
+        //.then(() => {this.props.history.push('/login');});
+    };
+
     render() {
-        let style = {};
-        let loginButton = 'Log in';
+        let userloggedin = {};
         if (this.props.currentUser.username) {
-            loginButton = 'Log out';
-            style = {display: 'flex'};
+            userloggedin = { display: 'flex' };
         } else {
-            loginButton = 'Log in';
-            style = {display: 'none'};
+            userloggedin = { display: 'none' };
+        }
+
+        let userloggedout = {};
+        if (this.props.currentUser.username) {
+            userloggedout = { display: 'none' };
+        } else {
+            userloggedout = { display: 'flex' };
         }
 
         return (
             <div className="NavBar">
-                <h4 style={style}>{this.props.currentUser.username}'s Dashboard</h4>
-                <NavLink to='/login' activeClassName="activeNavButton" >{loginButton}</NavLink>
-                <NavLink to='/myaccount' activeClassName="activeNavButton" style={style}>My Account</NavLink>
+                <h4 style={userloggedin}>{this.props.currentUser.username}'s Dashboard</h4>
+                <NavLink to='/login' activeClassName="activeNavButton" style={userloggedout}>Log in</NavLink>
+                <NavLink to='/login' onClick={this.logout} activeClassName="activeNavButton" style = {userloggedin}>Log out</NavLink>
+                <NavLink to='/myaccount' activeClassName="activeNavButton" style={userloggedin}>My Account</NavLink>
             </div>
         );
     }
@@ -31,5 +43,5 @@ const mapStateToProps = state => ({
 
 export default connect(
     mapStateToProps,
-    {}
+    { logout }
 )(NavBar);
