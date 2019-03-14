@@ -8,7 +8,8 @@ class CreateForm extends React.Component {
     postinfo: {
       title: '',
       description: '',
-      image: ''
+      // image: ''
+      imgFile: null
     },
     editing: false
   };
@@ -46,7 +47,8 @@ class CreateForm extends React.Component {
       postinfo: {
         title: '',
         description: '',
-        image: ''
+        // image: ''
+        imgFile: null
       }
     });
   };
@@ -58,14 +60,19 @@ class CreateForm extends React.Component {
       postinfo: {
         title: '',
         description: '',
-        image: ''
+        // image: ''
+        imgFile: null
       },
       editing: false
     });
   }
 
   fileSelectHandler = event => {
-    console.log(event);
+    console.log(event.target.files[0]);
+  }
+
+  fileUploadHandler = () => {
+
   }
 
 
