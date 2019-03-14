@@ -62,7 +62,7 @@ class SignUp extends React.Component {
               onChange={this.handleChange} />
             <Alert style={passwordcheck_style} color="warning">Password does not match</Alert>
           </FormGroup>
-          <Button color="primary">Sign up</Button>
+          <Button className='buttonz'>Sign up</Button>
         </Form>
       </div>
     );
