@@ -49,7 +49,7 @@
   bottom: 0;
   width: 100%;
   z-index: 2;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .errorMessage {
@@ -57,7 +57,7 @@
   bottom: 0;
   width: 100%;
   z-index: 2;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
 .NavBar {
@@ -98,4 +98,13 @@
 .table {
   margin: 0 auto;
   width: 80% !important;
+}
+
+.spinner {
+  position: absolute;
+  margin: auto auto;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 }
