@@ -16,6 +16,7 @@ class App extends Component {
         <div className="App">
           <TopMessage />
           <NavBar />
+          <div className='emptydiv'/>
           <Route path="/login" component={Login} />
           <Route path="/login" component={SignUp} />
           <PrivateRoute component={UserDashboard} />
