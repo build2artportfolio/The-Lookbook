@@ -311,6 +311,11 @@ footer strong {
     display: none;
   }
 }
+@media ( max-width: 375px) {
+  .accordion {
+    display: none;
+  }
+}
 .main-content {
   background: beige;
   padding-top: 1%;
