@@ -7,13 +7,20 @@ import {
   SIGNUP_ERROR,
   GET_USER_POSTS_SUCCESS,
   CREATE_POST_SUCCESS,
-  SET_EDIT
+  CREATE_ERROR,
+  SET_EDIT,
+  EDIT_ERROR,
+  DELETE_SUCCESS,
+  CLEAR_TOP_MESSAGE,
+  CLEAR_USER
 } from "../actions";
 
 const initialState = {
-  currentUser: null,
+  currentUser: {},
   currentUserPosts: [],
-  currentPost: {}
+  currentPost: {},
+  topMessage: '',
+  errorMessage: ''
 };
 
 const reducer = (state = initialState, action) => {
@@ -30,7 +37,7 @@ const reducer = (state = initialState, action) => {
     case LOGIN_ERROR:
       return {
         ...state,
-        error: action.payload
+        errorMessage: action.payload
       };
     case SIGNUP_START:
       return {
@@ -39,12 +46,12 @@ const reducer = (state = initialState, action) => {
     case SIGNUP_SUCCESS:
       return {
         ...state,
-        signupmessage: action.payload
+        topMessage: action.payload
       };
     case SIGNUP_ERROR:
       return {
         ...state,
-        signupmessage: action.payload
+        errorMessage: action.payload
       };
     case GET_USER_POSTS_SUCCESS:
       return {
@@ -53,13 +60,38 @@ const reducer = (state = initialState, action) => {
       };
     case CREATE_POST_SUCCESS:
       return {
+        ...state
+      };
+    case CREATE_ERROR:
+      return {
         ...state,
-        currentPost: {}
+        errorMessage: action.payload
       };
     case SET_EDIT:
       return {
         ...state,
         currentPost: action.payload
+      };
+    case EDIT_ERROR:
+      return {
+        ...state,
+        errorMessage: action.payload
+      };
+    case DELETE_SUCCESS:
+      return {
+        ...state,
+        topMessage: action.payload
+      };
+    case CLEAR_TOP_MESSAGE:
+      return {
+        ...state,
+        topMessage: '',
+        errorMessage: ''
+      };
+    case CLEAR_USER:
+      return {
+        ...state,
+        currentUser: {}
       };
     default:
       return state;

@@ -6,14 +6,17 @@
 .LoginForm {
   margin: 0 auto;
   width: 400px;
+  padding-top: 3rem;
 }
 .SignupForm {
   margin: 0 auto;
   width: 400px;
+  padding-top: 3rem;
 }
 .CreateForm {
   margin: 0 auto;
   width: 400px;
+  padding-top: 3rem;
 }
 
 .card_container {
@@ -25,4 +28,54 @@
 .card {
   margin: 0.5rem;
   width: 27%;
+}
+
+.topMessage {
+  position: fixed !important;
+  bottom: 0;
+  width: 100%;
+  z-index: 2;
+  opacity: 0.8;
+}
+
+.errorMessage {
+  position: fixed !important;
+  bottom: 0;
+  width: 100%;
+  z-index: 2;
+  opacity: 0.8;
+}
+
+.NavBar {
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  background-color: rgba(0, 0, 0, 0.7);
+  height: 2rem;
+}
+
+.NavBar a {
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2rem;
+  text-decoration: none !important;
+}
+
+.NavBar a:hover {
+  background-color: gray;
+  color: lightgray;
+}
+
+.NavBar h4 {
+  margin: 0;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 2rem;
+  right: 0;
 }
