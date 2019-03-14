@@ -23,6 +23,7 @@ const initialState = {
   currentPost: {},
   topMessage: '',
   errorMessage: '',
+  loginspinner: false
 };
 
 const reducer = (state = initialState, action) => {
@@ -30,6 +31,7 @@ const reducer = (state = initialState, action) => {
     case LOGIN_START:
       return {
         ...state,
+        loginspinner: true
       };
     case LOGIN_SUCCESS:
       return {
@@ -39,7 +41,8 @@ const reducer = (state = initialState, action) => {
     case LOGIN_ERROR:
       return {
         ...state,
-        errorMessage: action.payload
+        errorMessage: action.payload,
+        loginspinner: false
       };
     case SIGNUP_START:
       return {
@@ -58,7 +61,8 @@ const reducer = (state = initialState, action) => {
     case GET_USER_POSTS_SUCCESS:
       return {
         ...state,
-        currentUserPosts: action.payload
+        currentUserPosts: action.payload,
+        loginspinner: false
       };
     case CREATE_POST_SUCCESS:
       return {
