@@ -1,14 +1,9 @@
 // Mixins in here
 
-.btn {
-    .my-button();
-    // .glow();
-}
-
 .my-button(@bg-color: lightgrey, @font-color: black) {
   color: @font-color;
   background-color: @bg-color;
-  margin: 10px 0;
+  margin: auto;
   cursor: pointer;
   width: 10%;
   padding: 10px 0;
@@ -16,12 +11,16 @@
   border-radius: 10px;
   text-align: center;
   justify-content: center;
-  border: 1px solid black;
+  border: 2px solid black;
+  text-decoration: none;
+  margin-top: 1.5%;
+  margin-bottom: 1%;
 
   &:hover {
     color: @bg-color;
-    background-color: @font-color;
+    .color-gradient6();
   }
+
 }
 
 
@@ -69,6 +68,7 @@
 }
 
 // Color Gradient
+// 
 .color-gradient {
   background-image:linear-gradient(
     lightgrey, rgb(239, 250, 253)
@@ -85,9 +85,18 @@
   background-image:linear-gradient(to left, rgb(239, 250, 253), rgb(230, 225, 225))
 }
 
+.color-gradient5 {
+  background-image:linear-gradient(to right, rgb(239, 250, 253), rgb(230, 225, 225))
+}
+
 .color-gradient4 {
   background-image:linear-gradient(to bottom right, rgb(239, 250, 253), lightgrey)
 }
+
+.color-gradient6 {
+  background-image:linear-gradient(to left, rgb(239, 250, 253),beige)
+}
+
 
 // Dont have to use this, made a disco ball mixin for preprocessing week and I am a big fan.
 

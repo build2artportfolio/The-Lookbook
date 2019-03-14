@@ -16,7 +16,6 @@
 .first-post {
   display: flex;
   width: 95%;
-  // background-color: rgb(239, 250, 253);
   .color-gradient3();
   border: 2px solid black;
   border-radius: 10px;
@@ -38,6 +37,43 @@
   p {
     line-height: 1.5;
     font-size: 1.5rem;
+  }
+  
+  .sales-pitch {
+    margin: 1.5% 5%;
+  }
+}
+
+.last-post {
+  display: flex;
+  width: 95%;
+  .color-gradient5();
+  border: 2px solid black;
+  border-radius: 10px;
+  font-size: 1.15rem;
+  margin: auto;
+  margin-bottom: 1%;
+  justify-content: center;
+
+  .about-title-post {
+    a {
+      margin: auto;
+    }
+  }
+
+  p {
+    line-height: 1.5;
+    font-size: 1.5rem;
+  }
+
+}
+
+@media @mobile {
+  .last-post {
+    p {
+      margin: 3%;
+      font-size: 1.25rem;
+    }
   }
 }
 
@@ -91,6 +127,10 @@
   .wildlife {
     .fadein1();
   }  
+
+  .creators {
+    .fadein1();
+  }
 }
 
 @media @mobile {
@@ -98,7 +138,7 @@
     width: 92.5%;
     
     p{
-      font-size: 1.15rem;
+      font-size: 1.25rem;
     }
   }
 }
@@ -133,6 +173,7 @@
 
   p {
     padding-bottom: 10px;
+    margin: 0 5%;
   }
 
   li {
