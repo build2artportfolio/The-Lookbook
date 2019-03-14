@@ -26,10 +26,10 @@ The application is a social portfolio site (i.e. Instagram for photographers) ca
 
 **The general page breakdown looks like this:**
 
-- Sign in/Sign up pages (URL: /#/login )
+- Sign in/Sign up page (URL: /login )
     - Use JWT (store the token in localStorage)
-- Editor dashboard to create/edit/delete posts (URL: /#/ )
-- Profile page (URL: /#/myaccount )
+- Editor dashboard to create/edit/delete posts (URL: / )
+- Profile page (URL: /myaccount )
     - Show basic user info
     - List of posts populated from artist's created posts
 <br />
