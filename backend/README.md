@@ -75,6 +75,7 @@ Nodemon is used for restarting your Node.js Application automatically if any of 
 # Environment Variables
 
 - `JWT_SECRET` Any string, must be consistent per JWT Token.
+- `JWT_EXPIRE` A time in ms, or a time string like "1d" or "30m". Sets the duration of the JWT.
 - `DATABASE_URL` PostgreSQL connection string. Provided by Heroku if you have a PostgreSQL addon.
 - `DB_ENV` Can be set to `testing`, `development`, or `production`. Defaults to `development`.
 - `CLOUDINARY_URL` This is the environment variable that cloudinary uses by default. You can get this from your Cloudinary account dashboard.
