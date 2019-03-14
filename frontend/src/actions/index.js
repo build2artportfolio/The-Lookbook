@@ -133,3 +133,10 @@ export const deletePost = (post, update) => dispatch => {
       }
     })
 };
+
+export const logout = () => {
+  localStorage.removeItem('token');
+  return (
+    { type: CLEAR_USER }
+  )
+};
