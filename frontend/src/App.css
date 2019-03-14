@@ -1,22 +1,35 @@
-.App .Navbar {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 10px;
+.App {
+  background-color: beige;
 }
+
+.emptydiv {
+  height: 80px;
+}
+
 .LoginForm {
   margin: 0 auto;
-  width: 400px;
-  padding-top: 3rem;
+  width: 500px;
+  padding: 1rem;
+  border: 2px solid black;
+  border-radius: 15px;
+  background-image:linear-gradient(lightgrey, rgb(239, 250, 253));
 }
 .SignupForm {
-  margin: 0 auto;
-  width: 400px;
-  padding-top: 3rem;
+  margin: 3rem auto;
+  width: 500px;
+  padding: 1rem;
+  border: 2px solid black;
+  border-radius: 15px;
+  background-image:linear-gradient(lightgrey, rgb(239, 250, 253));
 }
 .CreateForm {
   margin: 0 auto;
-  width: 400px;
-  padding-top: 3rem;
+  margin-bottom: 3rem;
+  width: 500px;
+  padding: 1rem;
+  border: 2px solid black;
+  border-radius: 15px;
+  background-image:linear-gradient(lightgrey, rgb(239, 250, 253));
 }
 
 .card_container {
@@ -26,8 +39,9 @@
 }
 
 .card {
+  border: 1px solid black !important;
   margin: 0.5rem;
-  width: 27%;
+  width: 25rem;
 }
 
 .topMessage {
@@ -54,6 +68,7 @@
   justify-content: flex-end;
   background-image:linear-gradient(lightgrey, rgb(239, 250, 253));
   height: 2rem;
+  border-bottom: 1px solid black;
 }
 
 .NavBar a {
@@ -66,18 +81,9 @@
 }
 
 .NavBar a:hover {
+  border-radius: 5px;
   background-color: gray;
-  color: lightgray;
-}
-
-.NavBar h4 {
-  margin: 0;
   color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 2rem;
-  right: 0;
 }
 
 .buttonz {
@@ -87,4 +93,9 @@
 .buttonz:hover {
   background-image:linear-gradient(to left, rgb(239, 250, 253),beige);
   color: black !important;
+}
+
+.table {
+  margin: 0 auto;
+  width: 80% !important;
 }
