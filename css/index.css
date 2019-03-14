@@ -299,6 +299,7 @@ footer strong {
   padding: 7.5px;
   border: 2px solid black;
   margin: 5px;
+  border-radius: 20px;
 }
 .accordion .accordion-categories .active-tab {
   background-color: #a8a7a7;
