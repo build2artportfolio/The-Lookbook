@@ -9,6 +9,7 @@ export const SIGNUP_SUCCESS = 'SIGNUP_SUCCESS';
 export const SIGNUP_ERROR = 'SIGNUP_ERROR';
 
 export const GET_USER_POSTS_SUCCESS = 'GET_USER_POSTS_SUCCESS';
+export const SAVE_USER_INFO = 'SAVE_USER_INFO';
 
 export const CREATE_POST_SUCCESS = 'CREATE_POST_SUCCESS';
 export const CREATE_ERROR = 'CREATE_ERROR';
@@ -40,7 +41,7 @@ export const login = creds => dispatch => {
     })
     .catch(err => {
       dispatch({ type: LOGIN_ERROR, payload: err.response.data.message });
-      setTimeout(() => {dispatch({ type: CLEAR_TOP_MESSAGE })},5000);
+      setTimeout(() => {dispatch({ type: CLEAR_TOP_MESSAGE })},4000);
     });
 };
 
@@ -49,11 +50,11 @@ export const signUp = creds => dispatch => {
   return axios.post('https://thelookbook-api.herokuapp.com/api/auth/register', creds)
     .then(res => {
       dispatch({ type: SIGNUP_SUCCESS, payload: res.data.message })
-      setTimeout(() => {dispatch({ type: CLEAR_TOP_MESSAGE })},5000);
+      setTimeout(() => {dispatch({ type: CLEAR_TOP_MESSAGE })},4000);
     })
     .catch(err => {
       dispatch({ type: SIGNUP_ERROR, payload: err.response.data.message });
-      setTimeout(() => {dispatch({ type: CLEAR_TOP_MESSAGE })},5000);
+      setTimeout(() => {dispatch({ type: CLEAR_TOP_MESSAGE })},4000);
     });
 };
 
@@ -62,6 +63,7 @@ export const getUserPosts = id => dispatch => {
     .get(`https://thelookbook-api.herokuapp.com/api/users/${id}`)
     .then(res => {
       dispatch({ type: GET_USER_POSTS_SUCCESS, payload: res.data.posts });
+      dispatch({ type: SAVE_USER_INFO, payload: res.data });
     })
     .catch(err => {
       console.log(err.response.data.message);
@@ -77,10 +79,11 @@ export const createPost = (info, update) => dispatch => {
     })
     .catch(err => {
       dispatch({ type: CREATE_ERROR, payload: err.response.data.message });
-      setTimeout(() => {dispatch({ type: CLEAR_TOP_MESSAGE })},5000);
+      setTimeout(() => {dispatch({ type: CLEAR_TOP_MESSAGE })},4000);
       if (err.response.data.message === 'Your token has expired. Please log in again.') {
         dispatch({ type: CLEAR_USER });
         localStorage.removeItem('token');
+        setTimeout(() => {window.location.reload()},4000);
       }
     });
 };
@@ -105,10 +108,11 @@ export const editPost = (post, id, update) => dispatch => {
     })
     .catch(err => {
       dispatch({ type: EDIT_ERROR, payload: err.response.data.message });
-      setTimeout(() => {dispatch({ type: CLEAR_TOP_MESSAGE })},5000);
+      setTimeout(() => {dispatch({ type: CLEAR_TOP_MESSAGE })},4000);
       if (err.response.data.message === 'Your token has expired. Please log in again.') {
         dispatch({ type: CLEAR_USER });
         localStorage.removeItem('token');
+        setTimeout(() => {window.location.reload()},4000);
       }
     })
 };
@@ -121,15 +125,16 @@ export const deletePost = (post, update) => dispatch => {
       })
     .then(res => {
       dispatch({ type: DELETE_SUCCESS, payload: res.data.message });
-      setTimeout(() => {dispatch({ type: CLEAR_TOP_MESSAGE })},5000);
+      setTimeout(() => {dispatch({ type: CLEAR_TOP_MESSAGE })},4000);
       update(localStorage.getItem('currentUserID'));
     })
     .catch(err => {
       dispatch({ type: EDIT_ERROR, payload: err.response.data.message });
-      setTimeout(() => {dispatch({ type: CLEAR_TOP_MESSAGE })},5000);
+      setTimeout(() => {dispatch({ type: CLEAR_TOP_MESSAGE })},4000);
       if (err.response.data.message === 'Your token has expired. Please log in again.') {
         dispatch({ type: CLEAR_USER });
         localStorage.removeItem('token');
+        setTimeout(() => {window.location.reload()},4000);
       }
     })
 };

@@ -8,7 +8,7 @@ class NavBar extends React.Component {
     logout = e => {
         e.preventDefault();
         this.props.logout();
-        //.then(() => {this.props.history.push('/login');});
+        window.location.reload();
     };
 
     render() {
@@ -28,9 +28,9 @@ class NavBar extends React.Component {
 
         return (
             <div className="NavBar">
-                <h4 style={userloggedin}>{this.props.currentUser.username}'s Dashboard</h4>
+                <NavLink to='/' style={userloggedin}><h3>{this.props.currentUser.username}'s Dashboard</h3></NavLink>
                 <NavLink to='/login' activeClassName="activeNavButton" style={userloggedout}>Log in</NavLink>
-                <NavLink to='/login' onClick={this.logout} activeClassName="activeNavButton" style = {userloggedin}>Log out</NavLink>
+                <NavLink to='/' onClick={this.logout} activeClassName="activeNavButton" style = {userloggedin}>Log out</NavLink>
                 <NavLink to='/myaccount' activeClassName="activeNavButton" style={userloggedin}>My Account</NavLink>
             </div>
         );
