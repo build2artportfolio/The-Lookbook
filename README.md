@@ -1,7 +1,7 @@
 # The Lookbook
  - TDD https://docs.google.com/document/d/1vboWsYCMUFGayEtH4L8kwjpykRyIPZSSpgnReeJwzvg/edit#
  - Backend readme https://github.com/build2artportfolio/The-Lookbook/tree/master/backend
- - Frontend readme 
+ - Frontend readme https://github.com/build2artportfolio/The-Lookbook/blob/master/frontend/README.md
  - Style Guide https://github.com/build2artportfolio/The-Lookbook/blob/patrick-steveson/style-guide.md
 
 
