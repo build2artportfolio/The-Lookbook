@@ -35,9 +35,7 @@ class SignUp extends React.Component {
 
 
   render() {
-    let message_style = {};
     let passwordcheck_style = {};
-    this.props.signupmessage ? message_style = { display: 'block' } : message_style = { display: 'none' };
     (this.state.credentials.passwordcheck.length > 0 && this.state.credentials.passwordcheck !== this.state.credentials.password) ? passwordcheck_style = { display: 'block' } : passwordcheck_style = { display: 'none' };
     return (
       <div className='SignupForm'>
@@ -64,8 +62,7 @@ class SignUp extends React.Component {
               onChange={this.handleChange} />
             <Alert style={passwordcheck_style} color="warning">Password does not match</Alert>
           </FormGroup>
-          <Button color="primary">Sign Up</Button>
-          <Alert style={message_style} color="success">{this.props.signupmessage}</Alert>
+          <Button color="primary">Sign up</Button>
         </Form>
       </div>
     );

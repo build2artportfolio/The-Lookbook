@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Card, CardImg, CardText, CardBody,
     CardTitle, Button } from 'reactstrap';
-import { setEditForm } from '../actions';
+import { setEditForm, getUserPosts, deletePost } from '../actions';
 
 class Post extends React.Component {
     render() {
@@ -12,7 +12,8 @@ class Post extends React.Component {
                 <CardBody>
                     <CardTitle>{this.props.post.title}</CardTitle>
                     <CardText>{this.props.post.description}</CardText>
-                    <Button onClick={e => this.props.setEditForm(this.props.post)}>Edit</Button>
+                    <Button color="info" onClick={e => this.props.setEditForm(this.props.post)}>Edit</Button>
+                    <Button color="danger" onClick={e => this.props.deletePost(this.props.post,this.props.getUserPosts)}>Delete</Button>
                 </CardBody>
             </Card>
         );
@@ -24,5 +25,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { setEditForm }
+  { setEditForm, getUserPosts, deletePost }
 )(Post);

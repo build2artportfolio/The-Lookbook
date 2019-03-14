@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { createPost, getUserPosts, editPost } from '../actions';
-import { Alert, Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 
 class CreateForm extends React.Component {
   state = {
@@ -41,8 +41,7 @@ class CreateForm extends React.Component {
 
   createPost = e => {
     e.preventDefault();
-    this.props.createPost(this.state.postinfo);
-    this.props.getUserPosts(localStorage.getItem('currentUserID'));
+    this.props.createPost(this.state.postinfo, this.props.getUserPosts);
     this.setState({
       postinfo: {
         title: '',
@@ -54,7 +53,7 @@ class CreateForm extends React.Component {
 
   editPost = e => {
     e.preventDefault();
-    this.props.editPost(this.state.postinfo, this.props.currentPost.id);
+    this.props.editPost(this.state.postinfo, this.props.currentPost.id, this.props.getUserPosts);
     this.setState({
       postinfo: {
         title: '',
@@ -67,10 +66,12 @@ class CreateForm extends React.Component {
 
 
   render() {
+    let urlDisable = false;
     let myButton = 'Create Post';
     this.state.editing ? myButton = 'Update Post' : myButton = 'Create Post';
     let myButtonFunction = this.createPost;
     this.state.editing ? myButtonFunction = this.editPost : myButtonFunction = this.createPost;
+    this.state.editing ? urlDisable = true : urlDisable = false;
 
     return (
       <div className='CreateForm'>
@@ -94,7 +95,7 @@ class CreateForm extends React.Component {
             <Input type="text"
               name="image"
               value={this.state.postinfo.image}
-              onChange={this.handleChange} />
+              onChange={this.handleChange} disabled={urlDisable}/>
           </FormGroup>
           <Button color="primary">{myButton}</Button>
         </Form>
