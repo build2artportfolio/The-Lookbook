@@ -64,6 +64,10 @@ class CreateForm extends React.Component {
     });
   }
 
+  fileSelectHandler = event => {
+    console.log(event);
+  }
+
 
   render() {
     let urlDisable = false;
@@ -90,12 +94,18 @@ class CreateForm extends React.Component {
               value={this.state.postinfo.description}
               onChange={this.handleChange} />
           </FormGroup>
-          <FormGroup>
+          {/* <FormGroup>
             <Label>Image URL</Label>
             <Input type="text"
               name="image"
               value={this.state.postinfo.image}
               onChange={this.handleChange} disabled={urlDisable}/>
+          </FormGroup> */}
+          <FormGroup>
+            <Label>Image Upload</Label>
+            <Input type="file"
+              name="image"
+              onChange={this.fileSelectHandler} disabled={urlDisable}/>
           </FormGroup>
           <Button color="primary">{myButton}</Button>
         </Form>
