@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createPost, getUserPosts, editPost } from '../actions';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import axios from 'axios';
 
 class CreateForm extends React.Component {
   state = {
@@ -68,11 +69,23 @@ class CreateForm extends React.Component {
   }
 
   fileSelectHandler = event => {
-    console.log(event.target.files[0]);
+    this.setState({
+      imgFile: event.target.files[0]
+    })
   }
 
   fileUploadHandler = () => {
+    const frmData = new FormData();
+    frmData.append('image', this.state.imgFile, this.state.imgFile.name);
+    axios.post('location.com', frmData, {
+      onUploadProgress: ProgressEvent => {
+        // Change to Progress bar during styling and have nice visual feedback
+        console.log('Upload Progress: ' + Math.round(ProgressEvent.loaded / ProgressEvent.total * 100) + '%')
+      }
+    })
+      .then(res => {
 
+      });
   }
 
 
