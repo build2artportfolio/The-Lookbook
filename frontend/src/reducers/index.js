@@ -12,15 +12,17 @@ import {
   EDIT_ERROR,
   DELETE_SUCCESS,
   CLEAR_TOP_MESSAGE,
-  CLEAR_USER
+  CLEAR_USER,
+  SAVE_USER_INFO
 } from "../actions";
 
 const initialState = {
   currentUser: {},
+  currentUserInfo: {},
   currentUserPosts: [],
   currentPost: {},
   topMessage: '',
-  errorMessage: ''
+  errorMessage: '',
 };
 
 const reducer = (state = initialState, action) => {
@@ -92,6 +94,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         currentUser: {}
+      };
+    case SAVE_USER_INFO:
+      return {
+        ...state,
+        currentUserInfo: action.payload
       };
     default:
       return state;
