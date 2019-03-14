@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { logout } from '../actions';
 
+
 class NavBar extends React.Component {
 
     logout = e => {

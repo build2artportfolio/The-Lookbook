@@ -46,7 +46,7 @@ class Login extends React.Component {
             value={this.state.credentials.password}
             onChange={this.handleChange} />
         </FormGroup>
-          <Button color="primary">Log in</Button>
+          <Button className='buttonz'>Log in</Button>
         </Form>
         
       </div>
