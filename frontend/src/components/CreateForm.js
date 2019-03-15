@@ -84,7 +84,7 @@ class CreateForm extends React.Component {
       }
     })
       .then(res => {
-
+        console.log(res)
       });
   }
 
