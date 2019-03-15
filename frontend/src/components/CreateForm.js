@@ -131,7 +131,7 @@ class CreateForm extends React.Component {
               name="image"
               value={this.state.postinfo.image}
               // This can be changed to fileSelectHandler once able to select [0]th index for e.target.files[0]
-              onChange={this.handleChange} />
+              onChange={this.fileSelectHandler} disabled={urlDisable}/>
           </FormGroup>
           {/* Loading / Load Complete Icon */}
           <img 
