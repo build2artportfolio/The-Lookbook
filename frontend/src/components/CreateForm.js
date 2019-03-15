@@ -10,7 +10,7 @@ class CreateForm extends React.Component {
       title: '',
       description: '',
       // image: ''
-      imgFile: null
+      image: null
     },
     editing: false
   };
@@ -49,7 +49,7 @@ class CreateForm extends React.Component {
         title: '',
         description: '',
         // image: ''
-        imgFile: null
+        image: null
       }
     });
   };
@@ -62,17 +62,21 @@ class CreateForm extends React.Component {
         title: '',
         description: '',
         // image: ''
-        imgFile: null
+        image: null
       },
       editing: false
     });
   }
 
-  fileSelectHandler = event => {
+  fileSelectHandler = e => {
+    e.persist();
     this.setState({
-      imgFile: event.target.files[0]
-    })
-  }
+      postinfo: {
+        ...this.state.postinfo,
+        image: e.target.files[0]
+      }
+    });
+  };
 
   fileUploadHandler = () => {
     const frmData = new FormData();
@@ -125,7 +129,8 @@ class CreateForm extends React.Component {
             <Label>Image Upload</Label>
             <Input type="file"
               name="image"
-              onChange={this.fileSelectHandler} disabled={urlDisable}/>
+              value={this.state.postinfo.image}
+              onChange={this.handleChange} />
           </FormGroup>
           <Button color="primary">{myButton}</Button>
         </Form>
