@@ -83,7 +83,7 @@ class CreateForm extends React.Component {
     frmData.append('image', this.state.imgFile, this.state.imgFile.name);
     axios.post('location.com', frmData, {
       onUploadProgress: ProgressEvent => {
-        // Change to Progress bar during styling and have nice visual feedback
+        // Change to Progress bar or icon during styling and have nice visual feedback
         console.log('Upload Progress: ' + Math.round(ProgressEvent.loaded / ProgressEvent.total * 100) + '%')
       }
     })
@@ -130,8 +130,14 @@ class CreateForm extends React.Component {
             <Input type="file"
               name="image"
               value={this.state.postinfo.image}
+              // This can be changed to fileSelectHandler once able to select [0]th index for e.target.files[0]
               onChange={this.handleChange} />
           </FormGroup>
+          {/* Loading / Load Complete Icon */}
+          <img 
+            src=""
+            className="img-loading-icon"
+          />
           <Button color="primary">{myButton}</Button>
         </Form>
       </div>
