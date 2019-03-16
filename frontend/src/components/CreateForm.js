@@ -2,15 +2,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { createPost, getUserPosts, editPost } from '../actions';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import axios from 'axios';
 
 class CreateForm extends React.Component {
   state = {
     postinfo: {
       title: '',
       description: '',
-      // image: ''
-      image: null
+      image: ''
     },
     editing: false
   };
@@ -48,8 +46,7 @@ class CreateForm extends React.Component {
       postinfo: {
         title: '',
         description: '',
-        // image: ''
-        image: null
+        image: ''
       }
     });
   };
@@ -61,35 +58,10 @@ class CreateForm extends React.Component {
       postinfo: {
         title: '',
         description: '',
-        // image: ''
-        image: null
+        image: ''
       },
       editing: false
     });
-  }
-
-  fileSelectHandler = e => {
-    e.persist();
-    this.setState({
-      postinfo: {
-        ...this.state.postinfo,
-        image: e.target.files[0]
-      }
-    });
-  };
-
-  fileUploadHandler = () => {
-    const frmData = new FormData();
-    frmData.append('image', this.state.imgFile, this.state.imgFile.name);
-    axios.post('location.com', frmData, {
-      onUploadProgress: ProgressEvent => {
-        // Change to Progress bar or icon during styling and have nice visual feedback
-        console.log('Upload Progress: ' + Math.round(ProgressEvent.loaded / ProgressEvent.total * 100) + '%')
-      }
-    })
-      .then(res => {
-        console.log(res)
-      });
   }
 
 
@@ -118,26 +90,13 @@ class CreateForm extends React.Component {
               value={this.state.postinfo.description}
               onChange={this.handleChange} />
           </FormGroup>
-          {/* <FormGroup>
+          <FormGroup>
             <Label>Image URL</Label>
             <Input type="text"
               name="image"
               value={this.state.postinfo.image}
               onChange={this.handleChange} disabled={urlDisable}/>
-          </FormGroup> */}
-          <FormGroup>
-            <Label>Image Upload</Label>
-            <Input type="file"
-              name="image"
-              value={this.state.postinfo.image}
-              // This can be changed to fileSelectHandler once able to select [0]th index for e.target.files[0]
-              onChange={this.fileSelectHandler} disabled={urlDisable}/>
           </FormGroup>
-          {/* Loading / Load Complete Icon */}
-          <img 
-            src=""
-            className="img-loading-icon"
-          />
           <Button color="primary">{myButton}</Button>
         </Form>
       </div>
